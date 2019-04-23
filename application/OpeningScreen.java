@@ -1,5 +1,7 @@
 package application;
 
-public class OpeningScreen {
+import javafx.scene.Scene;
+
+public class OpeningScreen extends Scene{
  // tesitng git
 }
