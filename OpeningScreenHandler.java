@@ -19,14 +19,45 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	Button insertQuestionButton; //button user clicks to switch scenes to ManualNewQuestionScreen 
 	Button loadAdditionalTopics; //button user clicks to switch scenes to LoadAdditionalTopicFileScreen
 	
+	/**
+	 * This method handles ComboBox user interactions
+	 * @param cb
+	 */
 	void handle(ComboBox<String> cb ) {
-		//handles ComboBox user interactions
+		//if equals topic x, load topic x
+		if(cb.equals("ENTER IN TOPIC NAMES FROM JSON FILE"));
+		
+		//if equals topic y, load topic y
 	}
+	/**
+	 * This method handles TextField user interactions
+	 * @param tf
+	 */
 	void handle(TextField tf) {
-		//handles TextField user interactions
+		//If number is larger than the number of questions that match the chosen topic, 
+		//include the max number of questions that match the chosen topic. 
+		
+		//if tf>numQuestions, then load maxQuestions
+		
+		//else, load #tf of questions
 	}
 	void handle(Button b) {
-		//handles Button user interactions -
+		//CHECK WHICH BUTTON IS BEING PRESSED
+		if(b.equals("Start Quiz")) {
+			
+		}
+			//startQuizButton
+				//If there isn't at topic, or a number of questions entered, then display
+				//pop up asking for the two fields to be entered
+		else if(b.equals("Load Additional Topic")) {
+			
+		}
+			//insertQuestionButton
+				//Switch to LoadAdditionalTopic Screen
+		else if(b.equals("Insert a Question!")) {
+			
+		}
+		
 	}
 	@Override
 	public void handle(ActionEvent event) {
