@@ -15,8 +15,8 @@ public class Main extends Application {
 	Stage window; //root
 	Scene openingScreen, manualNewQuestionScreen, loadAdditionalTopicFileScreen;
 	Scene questionScreen, scoreScreen, goodbyeScreen;
-	SceneHandler openingScreenHandler;
-	
+	OpeningScreenHandler openingScreenHandler;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -28,7 +28,9 @@ public class Main extends Application {
 			primaryStage.setScene(openingScreen);
 			primaryStage.show();
 			
-			//How to create instances of the handlers?
+			//Create an instance of each handler?
+			openingScreenHandler = new OpeningScreenHandler();
+
 			
 			
 			
