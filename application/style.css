@@ -1,0 +1,21 @@
+.root {
+  -fx-background-color: lightblue;
+  -fx-font-size: 30;
+}
+.button{
+	-fx-min-width: 250;
+	-fx-min-height: 50;
+	-fx-font-size: 25;
+}
+.combo-box {
+	-fx-pref-height: 50;
+	-fx-pref-width: 200;
+    -fx-font-size : 15;
+}
+.combo-box-popup {
+	-fx-pref-height: 10;
+    -fx-font-size : 15;
+}
+.text-input{
+	-fx-max-width: 100;
+}
