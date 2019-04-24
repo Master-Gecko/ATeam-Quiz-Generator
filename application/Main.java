@@ -39,19 +39,19 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			window = primaryStage;
-			window.setTitle("CS 400 Quiz");
+			//window.setTitle("CS 400 Quiz");
 //			Create an instance of the opening screen
-//			openingScreen = new OpeningScreen(primaryStage);
-//			openingScreen.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			
+			window.setMinHeight(600);
+			window.setMinWidth(800);
+			window.setMaxHeight(600);
+			window.setMaxWidth(800);
 			
-
 			parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
 			window.setTitle(os.getTitle());
-	        System.out.println((primaryStage == null));
-	        System.out.println(os == null);
-	        System.out.println(parent == null);
+//	        System.out.println((primaryStage == null));
+//	        System.out.println(os == null);
+//	        System.out.println(parent == null);
 	        primaryStage.setScene(os.getScene());
 			primaryStage.show();
 			
