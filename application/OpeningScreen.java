@@ -23,8 +23,7 @@ public class OpeningScreen extends Scene{
   
 	public OpeningScreen(Parent parent) {
 	  super(parent);
-//	  	window = (Stage) getWindow();
-//		window.setTitle("CS 400 Quiz");
+
 		BorderPane root = new BorderPane();
 		VBox left = new VBox(20);
 		left.setPadding(new Insets(100,5,50,5));
@@ -52,7 +51,7 @@ public class OpeningScreen extends Scene{
 		left.getChildren().addAll(numQuestions,number);
 		root.setRight(right);
 		openingScreen = new Scene(root, 800,600);
-		//openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+		openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
 	
 	public Scene getScene() {
