@@ -29,8 +29,9 @@ public class Main extends Application {
 	//Fields for the primary stage and the classes for each "scene"
 	Stage window; //root
 	Group parent;
-	Scene openingScreen, manualNewQuestionScreen, loadAdditionalTopicFileScreen;
-	Scene questionScreen, scoreScreen, goodbyeScreen;
+	//Scene openingScreen, manualNewQuestionScreen, loadAdditionalTopicFileScreen;
+	OpeningScreen os;
+	//Scene questionScreen, scoreScreen, goodbyeScreen;
 	OpeningScreenHandler oHandler;;
 
 	@Override
@@ -40,7 +41,7 @@ public class Main extends Application {
 //			Create an instance of the opening screen
 //			openingScreen = new OpeningScreen(primaryStage);
 //			openingScreen.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			
+//			
 			window.setTitle("CS 400 Quiz");
 //			BorderPane root = new BorderPane();
 //			VBox left = new VBox(20);
@@ -73,6 +74,7 @@ public class Main extends Application {
 //			
 			parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
+			os.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	        System.out.println((primaryStage == null));
 	        System.out.println(os == null);
 	        System.out.println(parent == null);
