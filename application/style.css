@@ -10,7 +10,7 @@
 .combo-box {
 	-fx-pref-height: 50;
 	-fx-pref-width: 200;
-    -fx-font-size : 15;
+    -fx-font-size : 25;
 }
 .combo-box-popup {
 	-fx-pref-height: 10;
