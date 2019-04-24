@@ -18,8 +18,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class OpeningScreen extends Scene{
-
-	public OpeningScreen(Parent stage) {
+  private Stage window;
+  private Scene openingScreen;
+  
+	public OpeningScreen(Parent parent) {
+	  super(parent);
 		window.setTitle("CS 400 Quiz");
 		BorderPane root = new BorderPane();
 		VBox left = new VBox(20);
@@ -27,7 +30,7 @@ public class OpeningScreen extends Scene{
 		VBox right = new VBox(175);
 		right.setPadding(new Insets(100,5,50,5));
 		ObservableList<String> options = FXCollections.observableArrayList("Science", "Math", "English");
-		ComboBox topics = new ComboBox(options);
+        ComboBox<String> topics = new ComboBox<String>(options);
 //		topics.setPrefSize(200, 50);
 		Label topicsLabel= new Label("Topics of Quiz");
 		Button startQuiz = new Button("Start Quiz");
@@ -49,6 +52,9 @@ public class OpeningScreen extends Scene{
 		root.setRight(right);
 		openingScreen = new Scene(root, 800,600);
 		openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-		
+	}
+	
+	public Scene getScene() {
+	  return this.openingScreen;
 	}
 }

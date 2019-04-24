@@ -1,4 +1,3 @@
-package application;
 /**
  * 
  * Filename:   HashTableADT.java

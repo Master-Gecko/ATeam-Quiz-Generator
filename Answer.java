@@ -1,4 +1,3 @@
-package application;
 /**
  * 
  * Filename:   Answer.java
