@@ -20,10 +20,10 @@ import javafx.stage.Stage;
 public class OpeningScreen extends Scene{
   //private Stage window;
   private Scene openingScreen;
-  
+  private String title;
 	public OpeningScreen(Parent parent) {
 	  super(parent);
-
+	  	title = "CS 400 Quiz";
 		BorderPane root = new BorderPane();
 		VBox left = new VBox(20);
 		left.setPadding(new Insets(100,5,50,5));
@@ -56,5 +56,9 @@ public class OpeningScreen extends Scene{
 	
 	public Scene getScene() {
 	  return this.openingScreen;
+	}
+	
+	public String getTitle() {
+		return this.title;
 	}
 }
