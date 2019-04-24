@@ -18,12 +18,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class OpeningScreen extends Scene{
-  private Stage window;
+  //private Stage window;
   private Scene openingScreen;
   
 	public OpeningScreen(Parent parent) {
 	  super(parent);
-		window.setTitle("CS 400 Quiz");
+//	  	window = (Stage) getWindow();
+//		window.setTitle("CS 400 Quiz");
 		BorderPane root = new BorderPane();
 		VBox left = new VBox(20);
 		left.setPadding(new Insets(100,5,50,5));
@@ -51,7 +52,7 @@ public class OpeningScreen extends Scene{
 		left.getChildren().addAll(numQuestions,number);
 		root.setRight(right);
 		openingScreen = new Scene(root, 800,600);
-		openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+		//openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
 	
 	public Scene getScene() {

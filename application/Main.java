@@ -36,12 +36,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-//			window = primaryStage;
+			window = primaryStage;
 //			Create an instance of the opening screen
 //			openingScreen = new OpeningScreen(primaryStage);
 //			openingScreen.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
-//			window.setTitle("CS 400 Quiz");
+			window.setTitle("CS 400 Quiz");
 //			BorderPane root = new BorderPane();
 //			VBox left = new VBox(20);
 //			left.setPadding(new Insets(100,5,50,5));
@@ -87,7 +87,9 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+	public Stage getWindow() {
+		return window;
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
