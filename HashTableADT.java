@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * 
  * Filename:   HashTableADT.java
@@ -12,8 +14,9 @@ public interface HashTableADT<K extends Comparable<K>,V> {
 	 * Add the key and value to the hash table and increase the number of keys.
 	 * @param key Key to be inserted
 	 * @param value Value to be inserted
+	 * @throws IllegalNullKeyException 
 	 */
-	void insert(K key, V value) ;
+	void insert(K key, V value) throws IllegalNullKeyException ;
 	
 	/**
 	 * Remove the key from the hash table and decrease the number of keys.
@@ -26,8 +29,10 @@ public interface HashTableADT<K extends Comparable<K>,V> {
 	 * Gets the value paired with the key
 	 * @param key Key to be found in the hash table
 	 * @return the value associated with the key
+	 * @throws KeyNotFoundException 
+	 * @throws IllegalNullKeyException 
 	 */
-	V get(K key) ;
+	List<V> get(K key) throws IllegalNullKeyException, KeyNotFoundException ;
 	
 	/**
 	 * @return the number of keys in the hash table
