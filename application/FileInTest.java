@@ -9,6 +9,11 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * adding to master branch
+ * @author odmas
+ *
+ */
 class FileInTest {
 
 	@BeforeEach

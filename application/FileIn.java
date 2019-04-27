@@ -10,6 +10,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * adding to master branch
+ * @author odmas
+ *
+ */
 public class FileIn {
 	public FileIn(String filePath) throws FileNotFoundException, IOException, ParseException {
 		JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader(filePath));
@@ -22,6 +27,6 @@ public class FileIn {
 			String image = (String) jsonPackage.get("image");
 			JSONArray choiceArray = (JSONArray) jsonPackage.get("choiceArray");
 			System.out.println("metadata: " + metadata + " questionText: " + questionText + " topic: " + topic + " image: " + image + " choiceArrayLength: " + choiceArray.size());
-		} //t
+		}
 	}
 }
