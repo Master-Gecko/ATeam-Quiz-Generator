@@ -22,6 +22,6 @@ public class FileIn {
 			String image = (String) jsonPackage.get("image");
 			JSONArray choiceArray = (JSONArray) jsonPackage.get("choiceArray");
 			System.out.println("metadata: " + metadata + " questionText: " + questionText + " topic: " + topic + " image: " + image + " choiceArrayLength: " + choiceArray.size());
-		}
+		} //t
 	}
 }
