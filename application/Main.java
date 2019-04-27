@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
  */
 public class Main extends Application {
 	
+	static QuizDriver qd;
 	//Fields for the primary stage and the classes for each "scene"
 	Stage window; //root
 	static Group parent;
@@ -33,11 +34,12 @@ public class Main extends Application {
 	OpeningScreen os;
 	InsertQuestionScreen iqs;
 	//Scene questionScreen, scoreScreen, goodbyeScreen;
-	OpeningScreenHandler oHandler;;
+	OpeningScreenHandler oHandler;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			qd = new QuizDriver();
 			window = primaryStage;
 			//window.setTitle("CS 400 Quiz");
 //			Create an instance of the opening screen
@@ -55,6 +57,7 @@ public class Main extends Application {
 			//Create an instance of each handler?
 			oHandler = new OpeningScreenHandler(os.startQuiz);
 			os.startQuiz.setOnAction(oHandler);
+			
 			
 			//Other scenes
 		} catch(Exception e) {
