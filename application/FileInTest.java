@@ -9,7 +9,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FileInOutTest {
+class FileInTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -18,7 +18,7 @@ class FileInOutTest {
 	@Test
 	void test() {
 		try {
-			FileInOut file = new FileInOut("questions_001");
+			FileIn file = new FileIn("application/questions_001.json");
 		} catch (FileNotFoundException e) {
 			fail("unable to find file");
 		}
