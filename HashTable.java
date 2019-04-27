@@ -61,15 +61,26 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 			numKeys++;
 		} else { // one (or more) keys are already present
 			// check for topic
-			for (int i = 0; i < this.hashTable[hashIndex].size(); i++)
+		  Boolean added = false;
+			for (int i = 0; i < this.hashTable[hashIndex].size(); i++) {
 				if (key.equals(this.hashTable[hashIndex].get(i).get(0).getTopic())) {
 					// append question to the ArrayList in the HashTable at HashIndex
 					this.hashTable[hashIndex].get(i).add((Question) value);
 					numKeys++;
+					added = true;
 				}
-		}
-		if (this.getLoadFactor() > this.getLoadFactorThreshold())
-			this.hashTable = rehashTable(); System.out.println("Rehash Called: " + this.getLoadFactor());
+			}
+			if (!added) {
+			  List<Question> addMe = new ArrayList<Question>();
+			  addMe.add((Question) value);
+			  this.hashTable[hashIndex].add(addMe);
+              numKeys++;
+              added = true;
+			}
+			
+		} 
+		if (this.getLoadFactor() > this.getLoadFactorThreshold()) {
+			this.hashTable = rehashTable(); System.out.println("Rehash Called: " + this.getLoadFactor()); }
 	}
 
 	/**
