@@ -22,6 +22,7 @@ public class OpeningScreen extends Scene{
   //Fields
   private Scene openingScreen;
   private String title;
+  static Button startQuiz;
   
 	public OpeningScreen(Parent parent) {
 		super(parent);
@@ -36,7 +37,7 @@ public class OpeningScreen extends Scene{
 		ObservableList<String> options = FXCollections.observableArrayList("Science", "Math", "English");
         ComboBox<String> topics = new ComboBox<String>(options);
 		Label topicsLabel= new Label("Topics of Quiz");
-		Button startQuiz = new Button("Start\nQuiz");
+		startQuiz = new Button("Start\nQuiz");
 		startQuiz.setStyle("-fx-font-size: 60;");
 		startQuiz.setPrefSize(300, 300);
 		Button loadTopic = new Button("Load another topic");

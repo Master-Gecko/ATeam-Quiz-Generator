@@ -28,7 +28,7 @@ public class Main extends Application {
 	
 	//Fields for the primary stage and the classes for each "scene"
 	Stage window; //root
-	Group parent;
+	static Group parent;
 	//Scene openingScreen, manualNewQuestionScreen, loadAdditionalTopicFileScreen;
 	OpeningScreen os;
 	InsertQuestionScreen iqs;
@@ -49,14 +49,12 @@ public class Main extends Application {
 			parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
 			window.setTitle(os.getTitle());
-//	        System.out.println((primaryStage == null));
-//	        System.out.println(os == null);
-//	        System.out.println(parent == null);
 	        primaryStage.setScene(os.getScene());
 			primaryStage.show();
 			
 			//Create an instance of each handler?
-			oHandler = new OpeningScreenHandler();
+			oHandler = new OpeningScreenHandler(os.startQuiz);
+			os.startQuiz.setOnAction(oHandler);
 			
 			//Other scenes
 		} catch(Exception e) {
