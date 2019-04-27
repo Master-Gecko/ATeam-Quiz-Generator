@@ -66,7 +66,8 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 				if (key.equals(this.hashTable[hashIndex].get(i).get(0).getTopic())) {
 					// append question to the ArrayList in the HashTable at HashIndex
 					this.hashTable[hashIndex].get(i).add((Question) value);
-					numKeys++;
+					// Do not increment numKeys because we are tracking topics, not questions
+					//numKeys++;
 					added = true;
 				}
 			}
@@ -79,8 +80,8 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 			}
 			
 		} 
-		if (this.getLoadFactor() > this.getLoadFactorThreshold()) {
-			this.hashTable = rehashTable(); System.out.println("Rehash Called: " + this.getLoadFactor()); }
+		if (this.getLoadFactor() > this.getLoadFactorThreshold())
+			this.hashTable = rehashTable();
 	}
 
 	/**
@@ -105,11 +106,11 @@ public class HashTable<K extends Comparable<K>, V> implements HashTableADT<K, V>
 		          if (rehashedTable[hashIndex] == null || rehashedTable[hashIndex].size() == 0) { // not utilized -> insert new List<V>
 		            rehashedTable[hashIndex] = new ArrayList<List<Question>>();
 		            rehashedTable[hashIndex].add((List<Question>)valueList);
-		            numKeys += valueList.size();
+		            numKeys++; //+= valueList.size();
 		          } else { // one (or more) keys are already present
 		            // append kvPair to the ArrayList in the table at HashIndex
 		            rehashedTable[hashIndex].add((List<Question>)valueList);
-		            numKeys += valueList.size();
+		            numKeys++; //+= valueList.size();
 		          }
 		        }
 		      }

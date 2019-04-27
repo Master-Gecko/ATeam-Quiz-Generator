@@ -179,16 +179,16 @@ public class HashTableTest {
   public void test011_rehash_works_with_one_rehash() {
     try {
       int startingCapacity = 11;
-      ht1.insert("math", new Question("math", null, null, null)); System.out.print("success, ");
-      ht1.insert("science", new Question("science", null, null, null)); System.out.print("success, ");
-      ht1.insert("english", new Question("english", null, null, null)); System.out.print("success, ");
-      ht1.insert("computer science", new Question("computer science", null, null, null)); System.out.print("success, ");
-      ht1.insert("anthropology", new Question("anthropology", null, null, null)); System.out.print("success, ");
-      ht1.insert("biology", new Question("biology", null, null, null)); System.out.print("success, ");
-      ht1.insert("physics", new Question("physics", null, null, null)); System.out.print("success, ");
-      ht1.insert("psychology", new Question("psychology", null, null, null)); System.out.print("success, ");// Should rehash on the 9th insert
-      ht1.insert("sociology", new Question("sociology", null, null, null)); System.out.print("success, ");
-      ht1.insert("economics", new Question("economics", null, null, null)); System.out.print("success, ");
+      ht1.insert("math", new Question("math", null, null, null));
+      ht1.insert("science", new Question("science", null, null, null));
+      ht1.insert("english", new Question("english", null, null, null));
+      ht1.insert("computer science", new Question("computer science", null, null, null));
+      ht1.insert("anthropology", new Question("anthropology", null, null, null));
+      ht1.insert("biology", new Question("biology", null, null, null));
+      ht1.insert("physics", new Question("physics", null, null, null));
+      ht1.insert("psychology", new Question("psychology", null, null, null)); // Should rehash on the 9th insert
+      ht1.insert("sociology", new Question("sociology", null, null, null));
+      ht1.insert("economics", new Question("economics", null, null, null));
       System.out.println("ht1: "+ht1.getCapacity() + " sc: "+startingCapacity);
       assertTrue(ht1.getCapacity()>startingCapacity);
     } catch (Exception e) {
