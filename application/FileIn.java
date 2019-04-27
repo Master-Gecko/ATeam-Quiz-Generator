@@ -10,6 +10,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * adding to master branch
+ * @author odmas
+ *
+ */
 public class FileIn {
 	public FileIn(String filePath) throws FileNotFoundException, IOException, ParseException {
 		JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader(filePath));
