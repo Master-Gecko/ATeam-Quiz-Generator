@@ -69,7 +69,7 @@ public class OpeningScreen extends Scene{
 		root.add(insertQuestion, 3, 4);
 		
 		//Create the scene with the style sheet
-		openingScreen = new Scene(root, 800 , 500);
+		openingScreen = new Scene(root, 800, 600);
 		openingScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
 	
