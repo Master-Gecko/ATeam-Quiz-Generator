@@ -8,31 +8,24 @@ import java.util.List;
  * Authors:    Sammy Zopf 
  * 
  */
-public interface HashTableADT<K extends Comparable<K>,V> {
+public interface HashTableADT<V> {
 	
 	/**
-	 * Add the key and value to the hash table and increase the number of keys.
-	 * @param key Key to be inserted
-	 * @param value Value to be inserted
-	 * @throws IllegalNullKeyException 
+	 * Add the question to the hash table and increase the number 
+	 * of keys if this question is a new topic.
+	 * @param question to be inserted
+	 * @throws IllegalNullKeyException question was null
 	 */
-	void insert(K key, V value) throws IllegalNullKeyException ;
+	void insertQuestion(V question) throws IllegalNullKeyException ;
 	
 	/**
-	 * Remove the key from the hash table and decrease the number of keys.
-	 * @param key Key to be removed
-	 * @return true if key was removed; otherwise false.
+	 * Gets the list of questions for the given topic
+	 * @param topic to be found in the hash table
+	 * @return the list of questions associated with the topic
+	 * @throws KeyNotFoundException topic was not found
+	 * @throws IllegalNullKeyException topic was null
 	 */
-	boolean remove(K key) ;
-	
-	/**
-	 * Gets the value paired with the key
-	 * @param key Key to be found in the hash table
-	 * @return the value associated with the key
-	 * @throws KeyNotFoundException 
-	 * @throws IllegalNullKeyException 
-	 */
-	List<V> get(K key) throws IllegalNullKeyException, KeyNotFoundException ;
+	List<V> getQuestionsForTopic(String topic) throws IllegalNullKeyException, KeyNotFoundException ;
 	
 	/**
 	 * @return the number of keys in the hash table

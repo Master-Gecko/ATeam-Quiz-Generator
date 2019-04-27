@@ -15,11 +15,11 @@ import org.junit.Test;
 public class HashTableTest {
 
   // TODO: add other fields that will be used by multiple tests
-  HashTable<String, Question> ht1;
+  HashTable<Question> ht1;
   
   @Before
   public void setUp() throws Exception {
-    ht1 = new HashTable<String, Question>();
+    ht1 = new HashTable<Question>();
   }
 
   @After
@@ -33,10 +33,11 @@ public class HashTableTest {
   @Test
   public void test001_IllegalNullKey() {
     try {
-      ht1.insert(null,null);
+      ht1.insertQuestion(null);
       fail("should not be able to insert null key");
     } catch (IllegalNullKeyException e) {
       /* expected */ } catch (Exception e) {
+        System.out.println(e.getStackTrace());
       fail("insert null key should not throw exception " + e.getClass().getName());
     }
   }
@@ -47,7 +48,7 @@ public class HashTableTest {
   @Test
   public void test002_insert_one_KeyValuePair() {
     try {
-      ht1.insert("math", new Question("math", null, null, null));
+      ht1.insertQuestion(new Question("math", null, null, null));
     } catch (Exception e) {
       fail("Unexpected exception 002: " + e.getMessage());
     }
@@ -60,8 +61,8 @@ public class HashTableTest {
   public void test003_insert_same_topic() {
     try {
       // insert 10, 120
-      ht1.insert("math", new Question("math", null, null, null));
-      ht1.insert("math", new Question("math", null, null, null));
+      ht1.insertQuestion(new Question("math", null, null, null));
+      ht1.insertQuestion(new Question("math", null, null, null));
     } catch (Exception e) {
       fail("Unexpected exception 002: " + e.getMessage());
     }
@@ -89,8 +90,8 @@ public class HashTableTest {
   @Test
   public void test005_get_illegalNullException() {
     try {
-      ht1.insert("math", new Question("math", null, null, null));
-      ht1.get(null);
+      ht1.insertQuestion(new Question("math", null, null, null));
+      ht1.getQuestionsForTopic(null);
       fail("should not be able to get null key");
     } catch (IllegalNullKeyException e) {
       /* expected behavior */
@@ -130,7 +131,7 @@ public class HashTableTest {
   @Test
   public void test008_get_KeyNotFoundException_when_HashTable_is_empty() {
     try {
-      ht1.get("math");
+      ht1.getQuestionsForTopic("math");
       fail("should not be able to get a key");
     } catch (KeyNotFoundException e) {
       /* expected behavior */
@@ -145,8 +146,8 @@ public class HashTableTest {
   @Test
   public void test009_get_KeyNotFoundException_when_key_DNE() {
     try {
-      ht1.insert("math", new Question("math", null, null, null));
-      ht1.get("english");
+      ht1.insertQuestion(new Question("math", null, null, null));
+      ht1.getQuestionsForTopic("english");
       fail("should not be able to get a key");
     } catch (KeyNotFoundException e) {
       /* expected behavior */
@@ -162,11 +163,11 @@ public class HashTableTest {
   public void test010_get_works_with_one_key() {
     try {
       Question q = new Question("math", null, null, null);
-      ht1.insert("math", q);
+      ht1.insertQuestion(q);
       List<Question> expectedList = new ArrayList<Question>();
       expectedList.add(q);
       
-      assertTrue(expectedList.equals(ht1.get("math")));
+      assertTrue(expectedList.equals(ht1.getQuestionsForTopic("math")));
     } catch (Exception e) {
       fail("Unexpected exception 010: " + e.getMessage());
     }
@@ -179,16 +180,16 @@ public class HashTableTest {
   public void test011_rehash_works_with_one_rehash() {
     try {
       int startingCapacity = 11;
-      ht1.insert("math", new Question("math", null, null, null));
-      ht1.insert("science", new Question("science", null, null, null));
-      ht1.insert("english", new Question("english", null, null, null));
-      ht1.insert("computer science", new Question("computer science", null, null, null));
-      ht1.insert("anthropology", new Question("anthropology", null, null, null));
-      ht1.insert("biology", new Question("biology", null, null, null));
-      ht1.insert("physics", new Question("physics", null, null, null));
-      ht1.insert("psychology", new Question("psychology", null, null, null)); // Should rehash on the 9th insert
-      ht1.insert("sociology", new Question("sociology", null, null, null));
-      ht1.insert("economics", new Question("economics", null, null, null));
+      ht1.insertQuestion(new Question("math", null, null, null));
+      ht1.insertQuestion(new Question("science", null, null, null));
+      ht1.insertQuestion(new Question("english", null, null, null));
+      ht1.insertQuestion(new Question("computer science", null, null, null));
+      ht1.insertQuestion(new Question("anthropology", null, null, null));
+      ht1.insertQuestion(new Question("biology", null, null, null));
+      ht1.insertQuestion(new Question("physics", null, null, null));
+      ht1.insertQuestion(new Question("psychology", null, null, null)); // Should rehash on the 9th insert
+      ht1.insertQuestion(new Question("sociology", null, null, null));
+      ht1.insertQuestion(new Question("economics", null, null, null));
       System.out.println("ht1: "+ht1.getCapacity() + " sc: "+startingCapacity);
       assertTrue(ht1.getCapacity()>startingCapacity);
     } catch (Exception e) {
