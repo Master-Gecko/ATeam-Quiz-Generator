@@ -36,7 +36,6 @@ public class QuestionScreen extends Scene {
 		
 		// Create Elements
 		Label questionLabel = new Label("What is this?");
-		Button prevButton = new Button("Previous Question");
 		Button nextButton = new Button("Next Question");
 	    VBox choices = new VBox();
         ToggleGroup group = new ToggleGroup(); // group of radio buttons
@@ -51,7 +50,7 @@ public class QuestionScreen extends Scene {
 		    qImageView.setFitWidth(300); 
 		    
 		    //Setting the preserve ratio of the image view 
-		    //qImageView.setPreserveRatio(true);  
+		    qImageView.setPreserveRatio(true);  
 		    
 		    // set up radio buttons
 	        for (int i = 0; i < 4; i++) {
@@ -73,7 +72,6 @@ public class QuestionScreen extends Scene {
 			root.add(qImageView, 2, 0);
 			root.add(questionLabel, 0, 0);
 			root.add(choices, 0, 1);
-			root.add(prevButton, 0, 2);
 			root.add(nextButton, 2, 2);
 			
 		}
@@ -99,7 +97,6 @@ public class QuestionScreen extends Scene {
 			
 			root.add(questionLabel, 2, 0);
 			root.add(choices, 2, 1);
-			root.add(prevButton, 0, 3);
 			root.add(nextButton, 2, 3);
 		}
 		
@@ -109,7 +106,7 @@ public class QuestionScreen extends Scene {
 		root.setVgap(5);
 		root.setHgap(5);
 		
-		questionScreen = new Scene(root, 800, 500);
+		questionScreen = new Scene(root, 800, 600);
 		questionScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 		
 //		// for reference, doesn't work - throws Exception
