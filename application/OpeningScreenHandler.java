@@ -2,9 +2,12 @@ package application;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 
 /**
@@ -13,11 +16,11 @@ import javafx.scene.control.TextField;
  * an event handler class for the opening screen
  */
 class OpeningScreenHandler implements EventHandler<ActionEvent> {
-	ComboBox<String> quizDropDown; //dropdown menu for list of quiz topics for user to choose
-	TextField numQuestionsTextEntry; //single line text input for the number of questions desired
-	Button startQuizButton; //button to start the quiz
-	Button insertQuestionButton; //button user clicks to switch scenes to ManualNewQuestionScreen 
-	Button loadAdditionalTopics; //button user clicks to switch scenes to LoadAdditionalTopicFileScreen
+	Button b;
+	
+	OpeningScreenHandler(Button b) {
+		this.b = b;
+	}
 	
 	/**
 	 * This method handles ComboBox user interactions
@@ -61,7 +64,14 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	}
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
+		if (b.getText().equals("Start\nQuiz")) {
+			Group parent = new Group();
+			QuestionScreen qs = new QuestionScreen(parent);
+			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			primaryStage.setScene(qs.getScene());
+			primaryStage.setTitle(qs.getTitle());
+			
+		}
 		
 	}
 
