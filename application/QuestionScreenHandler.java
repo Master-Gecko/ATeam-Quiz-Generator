@@ -28,7 +28,7 @@ public class QuestionScreenHandler implements EventHandler<ActionEvent> {
 		if (b.getText().equals("Next Question")) {
 			Main.qd.updateScreen();
 		}
-		if (b.getText().equals("Submit")) {
+		else if (b.getText().equals("Submit Quiz")) {
 			Group parent = new Group();
 			ScoreScreen ss = new ScoreScreen(parent);
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();

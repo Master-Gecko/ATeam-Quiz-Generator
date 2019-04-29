@@ -65,8 +65,6 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		if (b.getText().equals("Start\nQuiz")) {
-			Group parent = new Group();
-			QuestionScreen qs = new QuestionScreen(parent);
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Main.qd.startQuiz(primaryStage);
 		}

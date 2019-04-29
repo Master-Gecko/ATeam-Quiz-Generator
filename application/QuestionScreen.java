@@ -34,9 +34,12 @@ public class QuestionScreen extends Scene {
 	static Image qImage;
 	static ImageView qImageView;
 	private int numChoices;
+	private boolean firstQuestion;
 	
 	public QuestionScreen(Parent parent) {
 		super(parent);
+		
+		firstQuestion = true;
 		
 		// Set Title
 		title = "CS400 Quiz";
@@ -46,7 +49,7 @@ public class QuestionScreen extends Scene {
 		
 		// Create Elements
 		questionLabel = new Label("What is this?");
-		Button nextButton = new Button("Next Question");
+		nextButton = new Button("Next Question");
 		nextButton.setOnAction(new QuestionScreenHandler(nextButton));
 		
  /*			if (true) { // question has image
@@ -120,6 +123,7 @@ public class QuestionScreen extends Scene {
 	}
 	
 	public Scene getScene(Question q) {
+		
 		if (q.getImagePath().equals("none")) { // question does not have image
 			questionLabel.setStyle("-fx-font-size: 25;");
 			choices = new VBox();
@@ -137,13 +141,22 @@ public class QuestionScreen extends Scene {
 	        	choices.getChildren().add(rb);
 	        	numChoices++;
 	        }
+	        
+	        // set up questionLabel
+	        questionLabel.setText(q.getQuestion());
+	        questionLabel.setMinWidth(400);
+	        questionLabel.setMaxWidth(400);
+        	questionLabel.setWrapText(true);
 			
-			root.add(questionLabel, 2, 0);
-			root.add(choices, 2, 1);
-			root.add(nextButton, 2, 3);	
-			
+        	if (firstQuestion) {
+        		root.add(questionLabel, 2, 0);
+				root.add(choices, 2, 1);
+				root.add(nextButton, 2, 3);	
+        	}
+        	
 		}
 		else { // question has image
+			
 			qImage = new Image(q.getImagePath());
 			qImageView = new ImageView(qImage);
 			
@@ -168,11 +181,20 @@ public class QuestionScreen extends Scene {
 	        	choices.getChildren().add(rb);
 	        	numChoices++;
 	        }
+	        
+	        // set up questionLabel
+	        questionLabel.setText(q.getQuestion());
+	        questionLabel.setMaxWidth(400);
+	        questionLabel.setMinWidth(400);
+        	questionLabel.setWrapText(true);
 
-			root.add(qImageView, 2, 0);
-			root.add(questionLabel, 0, 0);
-			root.add(choices, 0, 1);
-			root.add(nextButton, 2, 2);
+        	if (firstQuestion) {
+        		root.add(qImageView, 2, 0);
+				root.add(questionLabel, 0, 0);
+				root.add(choices, 0, 1);
+				root.add(nextButton, 2, 2);
+				firstQuestion = false;
+        	}
 			
 		}
 		return this.questionScreen;
@@ -192,6 +214,7 @@ public class QuestionScreen extends Scene {
 	
 	public String getSelectedAnswer() {
 		RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+		System.out.println(selectedRadioButton.getText());
 		return selectedRadioButton.getText();
 	}
 	

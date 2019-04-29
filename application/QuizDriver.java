@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -27,7 +28,17 @@ public class QuizDriver {
 	QuizDriver() {
 		numQuestions = 0;
 		numCorrect = 0;
+		quiz = new ArrayList<Question>();
 		currentQuestionIndex = 0;
+		
+		// to test QuestionScreen
+//		ArrayList answers = new ArrayList<Answer>();
+//		answers.add(new Answer(true, "right"));
+//		answers.add(new Answer(false, "wrong"));
+//		quiz.add(new Question("test", "This is a test question?", "doggy.JPG", answers));
+//		Collections.reverse(answers);
+//		quiz.add(new Question("test", "This is also test question?", "doggy.JPG", answers));
+//		numQuestions = 2;
 	}
 	
 	/**
@@ -66,11 +77,19 @@ public class QuizDriver {
 		currentQuestionIndex++;
 		primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 		if (currentQuestionIndex == numQuestions - 1)
-			qs.nextButton.setText("Submit");
+			qs.nextButton.setText("Submit Quiz");
 	}
 	
 	public double getQuizScore() {
 		return quizScore;
+	}
+	
+	public int getNumCorrect() {
+		return numCorrect;
+	}
+	
+	public int getNumQuestions() {
+		return numQuestions;
 	}
 	
 }

@@ -35,10 +35,12 @@ public class Main extends Application {
 	InsertQuestionScreen iqs;
 	//Scene questionScreen, scoreScreen, goodbyeScreen;
 	OpeningScreenHandler oHandler;
+	static public HashTable<Question> questionTable;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			questionTable = new HashTable<Question>();
 			qd = new QuizDriver();
 			window = primaryStage;
 			//window.setTitle("CS 400 Quiz");
