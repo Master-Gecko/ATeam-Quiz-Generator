@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -36,7 +37,6 @@ public class QuizDriver {
 //		answers.add(new Answer(true, "right"));
 //		answers.add(new Answer(false, "wrong"));
 //		quiz.add(new Question("test", "This is a test question?", "doggy.JPG", answers));
-//		Collections.reverse(answers);
 //		quiz.add(new Question("test", "This is also test question?", "doggy.JPG", answers));
 //		numQuestions = 2;
 	}
@@ -45,11 +45,23 @@ public class QuizDriver {
 	 * when the user chooses topic and number of questions on the Opening Screen, this method will
 	 * be used to randomly choose questions of the given topic from the HashTable.
 	 * 
+	 * Exceptions will likely never happen, as the "topic" parameter is passed as a choice from a
+	 * drop-down list containing topics in the table.
+	 * 
 	 * @param topic is the user-chosen question topic
 	 * @param numberOfQuestions is the number of questions to be added to the quiz
+	 * @throws KeyNotFoundException when there are no topics in the question HashTable with the given topic (should not happen)
+	 * @throws IllegalNullKeyException when the given topic is null (should not happen)
 	 */
-	void addQuestions(String topic, int numberOfQuestions) {
-		
+	void addQuestions(String topic, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
+		ArrayList<Question> topicQuestions = new ArrayList<Question>(Main.questionTable.getQuestionsForTopic(topic));
+		Random r = new Random(); 
+		Question addToQuiz;
+		for (int i = 0; i < numberOfQuestions; i++) {
+			addToQuiz = topicQuestions.get(r.nextInt(topicQuestions.size()));
+			topicQuestions.remove(addToQuiz);
+			quiz.add(addToQuiz);
+		}
 	}
 	
 	/**
