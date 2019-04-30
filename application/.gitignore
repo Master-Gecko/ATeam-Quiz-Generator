@@ -5,3 +5,13 @@
 /Answer.class
 /OpeningScreen.class
 /openingScreen.class
+/HashTable.class
+/IllegalNullKeyException.class
+/KeyNotFoundException.class
+/QuizDriver.class
+/SaveScreen.class
+/ScoreScreen.class
+/FileIn.class
+/FileInTest.class
+/FileOut.class
+/FileOutTest.class
