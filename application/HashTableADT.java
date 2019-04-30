@@ -42,7 +42,7 @@ public interface HashTableADT<V> {
 	/**
      * @return the number of questions in the hash table
      */
-	int numQs() ;
+	int getNumQs() ;
 
 	/**
 	 * @return the load factor threshold
