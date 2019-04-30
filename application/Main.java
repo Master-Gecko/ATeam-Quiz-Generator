@@ -21,7 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
- * @author titus, member of A-Team 60
+ * @author titus
  * This class launches the application window and is the main driver of the program
  */
 public class Main extends Application {
@@ -55,11 +55,6 @@ public class Main extends Application {
 			window.setTitle(os.getTitle());
 	        primaryStage.setScene(os.getScene());
 			primaryStage.show();
-			
-			//Create an instance of each handler?
-			oHandler = new OpeningScreenHandler(os.startQuiz);
-			os.startQuiz.setOnAction(oHandler);
-			
 			
 			//Other scenes
 		} catch(Exception e) {
