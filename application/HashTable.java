@@ -179,8 +179,23 @@ public class HashTable<V> implements HashTableADT<V> {
   }
 
   @Override
-  public int numQs() {
+  public int getNumQs() {
     return this.numQs;
   }
-
+  
+  @Override
+  public String toString() {
+    String output = "";
+    for (int i = 0; i < hashTable.length; i++) {
+      if (!(hashTable[i] == null))
+        for (int j = 0; j < hashTable[i].size(); j++) {
+          System.out.println(hashTable[i].get(0).get(0).getTopic());
+          for (int k = 0; k < hashTable[i].get(j).size(); k++) {
+            System.out.println(hashTable[i].get(j).get(k));
+          }
+        }
+    }
+    return output;
+    
+  }
 }

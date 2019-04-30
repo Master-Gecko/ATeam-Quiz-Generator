@@ -55,4 +55,21 @@ public class Question {
         return this.answer;
     }
     
+    @Override
+    public String toString() {
+      String output = "\t";
+      output += "meta-data:" + this.metaData + "\n\t";
+      output += "topic:" + this.topic + "\n\t";
+      output += "question:" + this.question + "\n\t";
+      output += "imagepath:" + this.imagePath + "\n";
+      for (Answer answer : answerList) {
+        output += "\tisCorrect:";
+        if (answer.isCorrect())
+          output += "T, ";
+        else
+          output += "F, ";
+        output += "answer:" + answer + "\n";
+      }
+      return output + "\n";
+    }
 }
