@@ -149,10 +149,11 @@ public class HashTable<V> implements HashTableADT<V> {
   public List<String> getAllTopics() {
     List<String> topicList = new ArrayList<String>();
     for (int i = 0; i < hashTable.length; i++) {
-      for (int j = 0; j < hashTable[i].size(); j++) {
-        // add the question's topic to the topic list
-        topicList.add(hashTable[i].get(j).get(0).getTopic());
-      }
+      if (!(hashTable[i] == null || hashTable[i].size() == 0)) 
+        for (int j = 0; j < hashTable[i].size(); j++) {
+          // add the question's topic to the topic list
+          topicList.add(hashTable[i].get(j).get(0).getTopic());
+        }
     }
     return topicList;
   }
@@ -178,7 +179,7 @@ public class HashTable<V> implements HashTableADT<V> {
   }
 
   @Override
-  public int getNumQs() {
+  public int numQs() {
     return this.numQs;
   }
 
