@@ -1,3 +1,5 @@
+package application;
+
 /**
  * Checked exception thrown when a non existent key is specified for get.
  */
