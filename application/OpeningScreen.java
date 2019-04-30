@@ -17,6 +17,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -56,13 +57,17 @@ public class OpeningScreen extends Scene{
 		Label topicsLabel= new Label("Topics of Quiz");
 		startQuiz = new Button("Start\nQuiz");
 		startQuiz.setStyle("-fx-font-size: 60;");
-		startQuiz.setPrefSize(250, 250);
+		//startQuiz.setPrefSize(250, 250);
 		startQuiz.setOnAction(new OpeningScreenHandler(startQuiz));
-		Button loadTopic = new Button("Load another topic");
+		Button loadTopic = new Button("Load questions from file");
 		Button insertQuestion = new Button("Insert another\nquestion");
 		insertQuestion.setOnAction(new OpeningScreenHandler(insertQuestion));
 		Label numQuestions = new Label("Number of\nQuestions");
 		number = new TextField();
+		HBox qNumber = new HBox();
+		qNumber.setAlignment(Pos.CENTER);
+		qNumber.setSpacing(10);
+		qNumber.getChildren().addAll(numQuestions,number);
 		instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
 		instructionLabel.setWrapText(true);
 		
@@ -77,17 +82,16 @@ public class OpeningScreen extends Scene{
 		root.add(topics, 0, 1);
 		
 		//Start Quiz Button
-		root.add(startQuiz, 2, 2);
+		root.add(startQuiz, 1, 2);
 		
 		//Number of Questions
-		root.add(numQuestions, 0, 3);
-		root.add(number, 0, 4);
+		root.add(qNumber, 0, 3);
 		
 		//Load Additional Topic
-		root.add(loadTopic, 3, 1);
+		root.add(loadTopic, 2, 1);
 		
 		//Insert a question
-		root.add(insertQuestion, 3, 4);
+		root.add(insertQuestion, 2, 3);
 		
 		//Instruction Label
 		root.add(instructionLabel, 0, 2);

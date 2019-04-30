@@ -44,11 +44,11 @@ public class Main extends Application {
 			qd = new QuizDriver();
 			window = primaryStage;
 			//window.setTitle("CS 400 Quiz");
-//			Create an instance of the opening screen
+			/*Create an instance of the opening screen*/
 			window.setMinHeight(600);
 			window.setMinWidth(800);
-			window.setMaxHeight(600);
-			window.setMaxWidth(800);
+			window.setMaxHeight(800);
+			window.setMaxWidth(1000);
 			
 			parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
