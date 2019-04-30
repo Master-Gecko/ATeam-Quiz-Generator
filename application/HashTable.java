@@ -3,6 +3,15 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * Filename: HashTable.java 
+ * Project: ATeam Quiz Generator 
+ * Course: cs400 
+ * Authors: Sammy Zopf
+ * 
+ * 3 Dimensional HashTable to store all of the questions by hashing their topics
+ */
 public class HashTable<V> implements HashTableADT<V> {
 
   /** the size of the HashTable **/
@@ -11,8 +20,10 @@ public class HashTable<V> implements HashTableADT<V> {
   private double loadFactorThreshold;
   /** the HashTable to store the question nodes in the HashTable **/
   private ArrayList<List<Question>>[] hashTable;
-  /** the number of key,value pairs in the HashTable **/
+  /** the number of topics in the HashTable **/
   private int numKeys;
+  /** the number of questions in the HashTable **/
+  private int numQs;
 
   /**
    * no-arg constructor that calls the other constructor with values: <br>
@@ -52,6 +63,7 @@ public class HashTable<V> implements HashTableADT<V> {
       this.hashTable[hashIndex].add(new ArrayList<Question>());
       this.hashTable[hashIndex].get(0).add((Question) question); // adds question
       numKeys++;
+      numQs++;
     } else { // one (or more) keys are already present
       // check for topic
       Boolean added = false;
@@ -59,8 +71,7 @@ public class HashTable<V> implements HashTableADT<V> {
         if (key.equals(this.hashTable[hashIndex].get(i).get(0).getTopic())) {
           // append question to the ArrayList in the HashTable at HashIndex
           this.hashTable[hashIndex].get(i).add((Question) question);
-          // Do not increment numKeys because we are tracking topics, not questions
-          // numKeys++;
+          numQs++;
           added = true;
         }
       }
@@ -69,6 +80,7 @@ public class HashTable<V> implements HashTableADT<V> {
         addMe.add((Question) question);
         this.hashTable[hashIndex].add(addMe);
         numKeys++;
+        numQs++;
         added = true;
       }
 
@@ -86,7 +98,6 @@ public class HashTable<V> implements HashTableADT<V> {
   private ArrayList<List<Question>>[] rehashTable() {
     int oldTS = this.tableSize;
     this.tableSize = this.tableSize * 2 + 1;
-    this.numKeys = 0;
     ArrayList<List<Question>>[] rehashedTable =
         (ArrayList<List<Question>>[]) new ArrayList<?>[this.tableSize];
 
@@ -97,19 +108,15 @@ public class HashTable<V> implements HashTableADT<V> {
           List<V> valueList = (List<V>) this.hashTable[i].get(j);
           int hashIndex = Math.abs(key.hashCode()) % this.tableSize;
 
-          if (rehashedTable[hashIndex] == null || rehashedTable[hashIndex].size() == 0) { // not
-                                                                                          // utilized
-                                                                                          // ->
-                                                                                          // insert
-                                                                                          // new
-                                                                                          // List<V>
+          // not utilized -> insert new List<V>
+          if (rehashedTable[hashIndex] == null || rehashedTable[hashIndex].size() == 0) {
             rehashedTable[hashIndex] = new ArrayList<List<Question>>();
             rehashedTable[hashIndex].add((List<Question>) valueList);
-            numKeys++; // += valueList.size();
+            // numKeys++; // += valueList.size();
           } else { // one (or more) keys are already present
             // append kvPair to the ArrayList in the table at HashIndex
             rehashedTable[hashIndex].add((List<Question>) valueList);
-            numKeys++; // += valueList.size();
+            // numKeys++; // += valueList.size();
           }
         }
       }
@@ -138,28 +145,41 @@ public class HashTable<V> implements HashTableADT<V> {
     throw new KeyNotFoundException(); // key was not found
   }
 
-  /** @return the number of keys in the HashTable **/
+  @Override
+  public List<String> getAllTopics() {
+    List<String> topicList = new ArrayList<String>();
+    for (int i = 0; i < hashTable.length; i++) {
+      for (int j = 0; j < hashTable[i].size(); j++) {
+        // add the question's topic to the topic list
+        topicList.add(hashTable[i].get(j).get(0).getTopic());
+      }
+    }
+    return topicList;
+  }
+
   @Override
   public int numKeys() {
     return this.numKeys;
   }
 
-  /** @return the load factor threshold **/
   @Override
   public double getLoadFactorThreshold() {
     return this.loadFactorThreshold;
   }
 
-  /** @return the load factor **/
   @Override
   public double getLoadFactor() {
     return (double) numKeys / (double) tableSize;
   }
 
-  /** @return the capacity of the HashTable **/
   @Override
   public int getCapacity() {
     return this.tableSize;
+  }
+
+  @Override
+  public int numQs() {
+    return this.numQs;
   }
 
 }

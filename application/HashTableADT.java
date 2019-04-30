@@ -30,23 +30,33 @@ public interface HashTableADT<V> {
 	List<V> getQuestionsForTopic(String topic) throws IllegalNullKeyException, KeyNotFoundException ;
 	
 	/**
+	 * @return a list of every topic in the HashTable
+	 */
+	List<String> getAllTopics();
+	
+	/**
 	 * @return the number of keys in the hash table
 	 */
 	int numKeys() ;
+	
+	/**
+     * @return the number of questions in the hash table
+     */
+	int numQs() ;
 
 	/**
 	 * @return the load factor threshold
 	 */
-    public double getLoadFactorThreshold() ;
+    double getLoadFactorThreshold() ;
 
     /**
      * @return the load factor
      */
-    public double getLoadFactor() ;
+    double getLoadFactor() ;
     
     /**
      * @return the capacity of the hash tables
      */
-    public int getCapacity() ;
+    int getCapacity() ;
 
 }
