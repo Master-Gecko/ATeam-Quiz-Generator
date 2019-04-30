@@ -1,5 +1,6 @@
 package application;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -11,9 +12,12 @@ import javafx.scene.Node;
 
 
 /**
- * @author titus
- * This class implements Java EventHandler interface to create
- * an event handler class for the opening screen
+ * 
+ * Filename:   OpeningScreenHandler.java
+ * Project:    ATeam Quiz Generator
+ * Course:     cs400 Spring 2019
+ * Authors:    Titus Smith, Eddie Morelli
+ * 
  */
 class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	Button b;
@@ -21,54 +25,55 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	OpeningScreenHandler(Button b) {
 		this.b = b;
 	}
-	
-	/**
-	 * This method handles ComboBox user interactions
-	 * @param cb
-	 */
-	void handle(ComboBox<String> cb ) {
-		//if equals topic x, load topic x
-		if(cb.equals("ENTER IN TOPIC NAMES FROM JSON FILE"));
 		
-		//if equals topic y, load topic y
-	}
-	/**
-	 * This method handles TextField user interactions
-	 * @param tf
-	 */
-	void handle(TextField tf) {
-		//If number is larger than the number of questions that match the chosen topic, 
-		//include the max number of questions that match the chosen topic. 
-		
-		//if tf>numQuestions, then load maxQuestions
-		
-		//else, load #tf of questions
-	}
-	void handle(Button b) {
-		//CHECK WHICH BUTTON IS BEING PRESSED
-		if(b.equals("Start Quiz")) {
-			
-		}
-			//startQuizButton
-				//If there isn't at topic, or a number of questions entered, then display
-				//pop up asking for the two fields to be entered
-		else if(b.equals("Load Additional Topic")) {
-			
-		}
-			//insertQuestionButton
-				//Switch to LoadAdditionalTopic Screen
-		else if(b.equals("Insert a Question!")) {
-			
-		}
-		
-	}
 	@Override
 	public void handle(ActionEvent event) {
 		if (b.getText().equals("Start\nQuiz")) {
+			// parse number of questions and topics
+			int numQuestions;
+			try {
+				numQuestions = Integer.parseInt(OpeningScreen.number.getText());
+			} catch (NumberFormatException e) {
+				OpeningScreen.instructionLabel.setText("Enter an (integer) number of questions.");
+				return;
+			}
+			ObservableList<String> selected = OpeningScreen.topics.getSelectionModel().getSelectedItems();
+			if (selected.isEmpty()) {
+				OpeningScreen.instructionLabel.setText("Choose topic(s).");
+				return;
+			}
+			try {
+				for (int i = 0; i < selected.size(); i++) {
+					// assures correct number of questions with equal distribution of topics
+					Main.qd.addQuestions(selected.get(i), (numQuestions / (selected.size() - i)));
+					System.out.println(numQuestions / (selected.size() - i));
+					numQuestions -= (numQuestions / (selected.size() - i));
+				}
+			} catch (IndexOutOfBoundsException e) { 
+				OpeningScreen.instructionLabel.setText("Not enough questions for one or more topics.");
+		 	} catch (Exception e) {
+				// this should never be reached, only here to avoid compiler error
+				System.out.println("unexpected exception");
+			}
+			
+			// change scene
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Main.qd.startQuiz(primaryStage);
 		}
-		
+//		else if (b.getText().equals("Load another topic")) {
+//			Group parent = new Group();
+//			LoadAdditionalTopicScreen lats = new LoadAdditionalTopicScreen(parent);
+//			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//			primaryStage.setScene(lats.getScene());
+//			primaryStage.setTitle(lats.getTitle());
+//		}
+		else if (b.getText().equals("Insert another\nquestion")) {
+			Group parent = new Group();
+			InsertQuestionScreen iqs = new InsertQuestionScreen(parent);
+			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+			primaryStage.setScene(iqs.getScene());
+			primaryStage.setTitle(iqs.getTitle());
+		}
 	}
 
 	}

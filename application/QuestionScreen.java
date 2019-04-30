@@ -33,13 +33,11 @@ public class QuestionScreen extends Scene {
 	static ToggleGroup group;
 	static Image qImage;
 	static ImageView qImageView;
+	static Label warningLabel;
 	private int numChoices;
-	private boolean firstQuestion;
 	
 	public QuestionScreen(Parent parent) {
 		super(parent);
-		
-		firstQuestion = true;
 		
 		// Set Title
 		title = "CS400 Quiz";
@@ -47,75 +45,17 @@ public class QuestionScreen extends Scene {
 		// Create a GridPane
 		root = new GridPane();
 		
-		// Create Elements
-		questionLabel = new Label("What is this?");
-		nextButton = new Button("Next Question");
-		nextButton.setOnAction(new QuestionScreenHandler(nextButton));
-		
- /*			if (true) { // question has image
-			qImage = new Image("doggy.JPG");
-			qImageView = new ImageView(qImage);
-			
-		    //setting the fit height and width of the image view 
-		    qImageView.setFitHeight(300); 
-		    qImageView.setFitWidth(300); 
-		    
-		    //Setting the preserve ratio of the image view 
-		    qImageView.setPreserveRatio(true);  
-		    
-		    // set up radio buttons
-	        for (int i = 0; i < 4; i++) {
-	        	RadioButton rb = new RadioButton("Good Boy");
-	        	rb.setToggleGroup(group);
-	        	rb.setMaxWidth(400);
-	        	rb.setWrapText(true);
-	        	rb.setStyle("-fx-font-size: 15;");;
-	        	choices.getChildren().add(rb);
-	        }
-	        
-	        RadioButton longChoice = new RadioButton("This is a really long answer. This answer is really long. Is this answer really long?");
-	    	longChoice.setToggleGroup(group);
-	    	longChoice.setMaxWidth(400);
-	    	longChoice.setWrapText(true);
-	    	longChoice.setStyle("-fx-font-size: 15;");
-	    	choices.getChildren().add(longChoice);
-
-			root.add(qImageView, 2, 0);
-			root.add(questionLabel, 0, 0);
-			root.add(choices, 0, 1);
-			root.add(nextButton, 2, 2);
-			
-		}
-		else { // question does not have image
-			
-			questionLabel.setStyle("-fx-font-size: 25;");
-			//set up radio buttons
-	        for (int i = 0; i < 4; i++) {
-	        	RadioButton rb = new RadioButton("Good Boy");
-	        	rb.setToggleGroup(group);
-	        	rb.setMaxWidth(400);
-	        	rb.setWrapText(true);
-	        	rb.setStyle("-fx-font-size: 20;");;
-	        	choices.getChildren().add(rb);
-	        }
-	        
-	        RadioButton longChoice = new RadioButton("This is a really long answer. This answer is really long. Is this answer really long?");
-	    	longChoice.setToggleGroup(group);
-	    	longChoice.setMaxWidth(400);
-	    	longChoice.setWrapText(true);
-	    	longChoice.setStyle("-fx-font-size: 20;");
-	    	choices.getChildren().add(longChoice);
-			
-			root.add(questionLabel, 2, 0);
-			root.add(choices, 2, 1);
-			root.add(nextButton, 2, 3);
-		} */
-		
 		//Set padding and gaps
 		root.setPadding(new Insets(20, 20, 20, 20));
 		//root.setGridLinesVisible(true);
 		root.setVgap(5);
 		root.setHgap(5);
+		
+		// Create Elements
+		questionLabel = new Label("What is this?");
+		nextButton = new Button("Next Question");
+		nextButton.setOnAction(new QuestionScreenHandler(nextButton));
+		warningLabel = new Label();
 		
 		questionScreen = new Scene(root, 800, 600);
 		questionScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -124,14 +64,13 @@ public class QuestionScreen extends Scene {
 	
 	public Scene getScene(Question q) {
 		
-		if (q.getImagePath().equals("none")) { // question does not have image
-			questionLabel.setStyle("-fx-font-size: 25;");
-			choices = new VBox();
-	        group = new ToggleGroup();
+		if (q.getImagePath().equals("none")) { // question does not have image  
 			
-			//set up radio buttons
-			numChoices = 0;
-			List<Answer> answerList = q.getAnswerList();
+		    // set up radio buttons
+		    choices = new VBox();
+	        group = new ToggleGroup();
+	        numChoices = 0;
+		    List<Answer> answerList = q.getAnswerList();
 	        for (int i = 0; i < answerList.size(); i++) {
 	        	RadioButton rb = new RadioButton(answerList.get(i).toString());
 	        	rb.setToggleGroup(group);
@@ -144,15 +83,15 @@ public class QuestionScreen extends Scene {
 	        
 	        // set up questionLabel
 	        questionLabel.setText(q.getQuestion());
-	        questionLabel.setMinWidth(400);
 	        questionLabel.setMaxWidth(400);
+	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
-			
-        	if (firstQuestion) {
-        		root.add(questionLabel, 2, 0);
-				root.add(choices, 2, 1);
-				root.add(nextButton, 2, 3);	
-        	}
+
+        	
+			root.add(questionLabel, 2, 0);
+			root.add(choices, 2, 1);
+			root.add(nextButton, 2, 2);
+			root.add(warningLabel, 2, 3);
         	
 		}
 		else { // question has image
@@ -187,15 +126,14 @@ public class QuestionScreen extends Scene {
 	        questionLabel.setMaxWidth(400);
 	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
+        	
+        	root.add(qImageView, 2, 0);
+			root.add(questionLabel, 0, 0);
+			root.add(choices, 0, 1);
+			root.add(nextButton, 2, 2);
+			root.add(warningLabel, 0, 2);
 
-        	if (firstQuestion) {
-        		root.add(qImageView, 2, 0);
-				root.add(questionLabel, 0, 0);
-				root.add(choices, 0, 1);
-				root.add(nextButton, 2, 2);
-				firstQuestion = false;
-        	}
-			
+        	
 		}
 		return this.questionScreen;
 	}
@@ -214,7 +152,6 @@ public class QuestionScreen extends Scene {
 	
 	public String getSelectedAnswer() {
 		RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
-		System.out.println(selectedRadioButton.getText());
 		return selectedRadioButton.getText();
 	}
 	

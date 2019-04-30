@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
 /**
@@ -33,16 +34,18 @@ public class QuizDriver {
 		currentQuestionIndex = 0;
 		
 		// to test QuestionScreen
-//		ArrayList answers = new ArrayList<Answer>();
+//		ArrayList<Answer> answers = new ArrayList<Answer>();
 //		answers.add(new Answer(true, "right"));
 //		answers.add(new Answer(false, "wrong"));
 //		quiz.add(new Question("test", "This is a test question?", "doggy.JPG", answers));
 //		quiz.add(new Question("test", "This is also test question?", "doggy.JPG", answers));
-//		numQuestions = 2;
+//		ArrayList<Answer> answers2 = new ArrayList<Answer>(answers);
+//		answers2.add(new Answer(false, "third option"));
+//		quiz.add(new Question("test", "This is a test question 3?", "none", answers2));
 	}
 	
 	/**
-	 * when the user chooses topic and number of questions on the Opening Screen, this method will
+	 * When the user chooses topic and number of questions on the Opening Screen, this method will
 	 * be used to randomly choose questions of the given topic from the HashTable.
 	 * 
 	 * Exceptions will likely never happen, as the "topic" parameter is passed as a choice from a
@@ -54,6 +57,9 @@ public class QuizDriver {
 	 * @throws IllegalNullKeyException when the given topic is null (should not happen)
 	 */
 	void addQuestions(String topic, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
+		if (Main.questionTable.getQuestionsForTopic(topic).size() < numberOfQuestions) {
+			throw new IndexOutOfBoundsException();
+		}
 		ArrayList<Question> topicQuestions = new ArrayList<Question>(Main.questionTable.getQuestionsForTopic(topic));
 		Random r = new Random(); 
 		Question addToQuiz;
@@ -68,28 +74,50 @@ public class QuizDriver {
 	 * this method will serve as the driver for the Quiz.
 	 */
 	public void startQuiz(Stage primaryStage) {
+		numQuestions = quiz.size();
 		this.primaryStage = primaryStage;
 		Group parent = new Group();
 		qs = new QuestionScreen(parent);
 		primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
-		primaryStage.setTitle(qs.getTitle());
+		primaryStage.setTitle("Question " + 1 + "/" + numQuestions);
 	}
 	
 	/**
 	 * changes the question when the user chooses to move on.
 	 */
 	void updateScreen() {
+		// make sure an answer is selected
+		if (qs.group.getSelectedToggle() == null) {
+			QuestionScreen.warningLabel.setText("Choose an answer!");
+			return;
+		}
+		QuestionScreen.warningLabel.setText("");
+		
 		// check if right answer
 		for (int i = 0; i < qs.getNumberOfChoices(); i++) {
-			if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer()))
+			if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer())) {
 				numCorrect++;
+				i = qs.getNumberOfChoices();
+			}
 		}
 		
 		// move to next question
+		QuestionScreen.group.getSelectedToggle().setSelected(false);
 		currentQuestionIndex++;
-		primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
-		if (currentQuestionIndex == numQuestions - 1)
-			qs.nextButton.setText("Submit Quiz");
+		if (currentQuestionIndex != numQuestions) {
+			QuestionScreen.root.getChildren().remove(QuestionScreen.questionLabel);
+			QuestionScreen.root.getChildren().remove(QuestionScreen.choices);
+			QuestionScreen.root.getChildren().remove(QuestionScreen.nextButton);
+			QuestionScreen.root.getChildren().remove(QuestionScreen.warningLabel);
+			if (QuestionScreen.root.getChildren().contains(QuestionScreen.qImageView)) {
+				QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
+			}
+			QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
+			primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
+			primaryStage.setTitle("Question " + (currentQuestionIndex + 1) + "/" + numQuestions);
+			if (currentQuestionIndex == numQuestions - 1)
+				qs.nextButton.setText("Submit Quiz");
+		}
 	}
 	
 	public double getQuizScore() {
