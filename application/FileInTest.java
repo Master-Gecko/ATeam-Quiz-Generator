@@ -1,9 +1,10 @@
 package application;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,11 +24,14 @@ class FileInTest {
 	@Test
 	void test() {
 		try {
-			FileIn file = new FileIn("application/questions_001.json");
+			HashTable<Question> hash = new HashTable<Question>();
+			FileIn file = new FileIn("application/questions_003_new.json", hash);
+			System.out.println(hash);
 		} catch (FileNotFoundException e) {
 			fail("unable to find file");
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			fail("threw exception");
 		}
 	}
