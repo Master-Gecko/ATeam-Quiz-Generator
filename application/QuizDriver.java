@@ -27,6 +27,9 @@ public class QuizDriver {
 	private Stage primaryStage;
 	private QuestionScreen qs;
 	
+	/**
+	 * Constructor for QuizDriver object, which initializes fields.
+	 */
 	QuizDriver() {
 		numQuestions = 0;
 		numCorrect = 0;
@@ -57,11 +60,11 @@ public class QuizDriver {
 	 * @throws IllegalNullKeyException when the given topic is null (should not happen)
 	 */
 	void addQuestions(String topic, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
-		if (Main.questionTable.getQuestionsForTopic(topic).size() < numberOfQuestions) {
+		if (Main.questionTable.getQuestionsForTopic(topic).size() < numberOfQuestions) { // not enough questions for this topic
 			throw new IndexOutOfBoundsException();
 		}
 		ArrayList<Question> topicQuestions = new ArrayList<Question>(Main.questionTable.getQuestionsForTopic(topic));
-		Random r = new Random(); 
+		Random r = new Random(); // random object to randomly select questions from question HashTable
 		Question addToQuiz;
 		for (int i = 0; i < numberOfQuestions; i++) {
 			addToQuiz = topicQuestions.get(r.nextInt(topicQuestions.size()));
@@ -120,14 +123,26 @@ public class QuizDriver {
 		}
 	}
 	
+	/**
+	 * Getter method for the user's quiz score.
+	 * @return the user's score.
+	 */
 	public double getQuizScore() {
-		return quizScore;
+		return (double)numCorrect/numQuestions;
 	}
 	
+	/**
+	 * Getter method for the number of questions that the user answered correctly.
+	 * @return the number of questions that the user answered correctly
+	 */
 	public int getNumCorrect() {
 		return numCorrect;
 	}
 	
+	/**
+	 * Getter method for the total number of questions in the quiz.
+	 * @return the total number of questions in the quiz.
+	 */
 	public int getNumQuestions() {
 		return numQuestions;
 	}
