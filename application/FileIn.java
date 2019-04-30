@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +17,8 @@ import org.json.simple.parser.ParseException;
  *
  */
 public class FileIn {
-	public FileIn(String filePath) throws FileNotFoundException, IOException, ParseException {
+	private ArrayList<Question> questions;
+	public FileIn(String filePath, HashTable<Question> hash) throws FileNotFoundException, IOException, ParseException {
 		JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader(filePath));
 		JSONArray packages = (JSONArray) jo.get("questionArray"); // finds the start of packages data
 		for (int i = 0; i < packages.size(); i++) { // iterates through each package in packages data
@@ -27,6 +29,15 @@ public class FileIn {
 			String image = (String) jsonPackage.get("image");
 			JSONArray choiceArray = (JSONArray) jsonPackage.get("choiceArray");
 			System.out.println("metadata: " + metadata + " questionText: " + questionText + " topic: " + topic + " image: " + image + " choiceArrayLength: " + choiceArray.size());
+			questions.add(new Question(topic, questionText, image, choiceArray));
+		}
+		for (Question q : questions) {
+			try {
+				hash.insertQuestion(q);
+			} catch (IllegalNullKeyException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package application;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +23,7 @@ class FileInTest {
 	@Test
 	void test() {
 		try {
-			FileIn file = new FileIn("application/questions_001.json");
+			//FileIn file = new FileIn("application/questions_001.json");
 		} catch (FileNotFoundException e) {
 			fail("unable to find file");
 		}
