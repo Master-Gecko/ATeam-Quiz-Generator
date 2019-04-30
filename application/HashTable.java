@@ -178,7 +178,7 @@ public class HashTable<V> implements HashTableADT<V> {
   }
 
   @Override
-  public int numQs() {
+  public int getNumQs() {
     return this.numQs;
   }
 
