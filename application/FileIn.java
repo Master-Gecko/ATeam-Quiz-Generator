@@ -17,7 +17,7 @@ import org.json.simple.parser.ParseException;
  *
  */
 public class FileIn {
-	private ArrayList<Question> questions;
+	private ArrayList<Question> questions = new ArrayList<Question>();
 	public FileIn(String filePath, HashTable<Question> hash) throws FileNotFoundException, IOException, ParseException {
 		JSONObject jo = (JSONObject) new JSONParser().parse(new FileReader(filePath));
 		JSONArray packages = (JSONArray) jo.get("questionArray"); // finds the start of packages data
@@ -28,8 +28,18 @@ public class FileIn {
 			String topic = (String) jsonPackage.get("topic");
 			String image = (String) jsonPackage.get("image");
 			JSONArray choiceArray = (JSONArray) jsonPackage.get("choiceArray");
-			System.out.println("metadata: " + metadata + " questionText: " + questionText + " topic: " + topic + " image: " + image + " choiceArrayLength: " + choiceArray.size());
-			questions.add(new Question(topic, questionText, image, choiceArray));
+//			System.out.println("metadata: " + metadata + " questionText: " + questionText + " topic: " + topic + " image: " + image + " choiceArrayLength: " + choiceArray.size());
+			//TODO: must convert coiceArray to arraylist of answers
+			ArrayList<Answer> answers = new ArrayList<Answer>();
+			for (int j = 0; j < choiceArray.size(); j ++) {
+				JSONObject answer = (JSONObject) choiceArray.get(j);
+				Boolean correct = false;
+				if (answer.get("isCorrect").equals("T"))
+					correct = true;
+				String answerText = (String) answer.get("choice");
+				answers.add(new Answer(correct,answerText));
+			}
+			questions.add(new Question(topic,metadata, questionText, image, answers));
 		}
 		for (Question q : questions) {
 			try {

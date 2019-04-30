@@ -1,8 +1,12 @@
 package application;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +22,15 @@ import org.json.simple.parser.ParseException;
  *
  */
 public class FileOut {
-	private ArrayList<Question> questions;
+	private List<Question> questions;
+	private ArrayList<JSONObject> questionArray;
+	
 
-	public FileOut(String filePath, HashTable<ArrayList<List<Question>>> hashTable)
+	public FileOut(String filePath, HashTable<Question> hashTable)
 			throws FileNotFoundException, IOException, ParseException {
+//		System.out.println(hashTable.getAllTopics());
+		JSONObject JSONQuestionArray = new JSONObject();
+		questionArray = new ArrayList<JSONObject>();
 		for (String topic : hashTable.getAllTopics()) {
 			try {
 				questions = hashTable.getQuestionsForTopic(topic);
@@ -29,10 +38,29 @@ public class FileOut {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			for (Object q : questions) {
+			for (Question q : questions) {
 				JSONObject question = new JSONObject();
-				question.put("questionText", 
+				question.put("meta-data", "unused");
+				question.put("questionText", q.getQuestion());
+				question.put("topic", q.getTopic());
+				question.put("image", q.getImagePath());
+				JSONArray answers = new JSONArray();
+				for (Answer a : q.getAnswerList()) {
+					JSONObject curr = new JSONObject();
+					if (a.isCorrect())
+						curr.put("isCorrect", "T");
+					else 
+						curr.put("isCorrect", "F");
+					curr.put("choice", a.toString());
+					answers.add(curr);
+				}
+				question.put("choiceArray", answers);
+				questionArray.add(question);
 			}
 		}
+		JSONQuestionArray.put("questionArray", questionArray);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+		writer.write(JSONQuestionArray.toString());
+		writer.close();
 	}
 }
