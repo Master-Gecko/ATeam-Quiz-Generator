@@ -118,7 +118,6 @@ public class QuizDriver {
 			if (QuestionScreen.root.getChildren().contains(QuestionScreen.qImageView)) {
 				QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
 			}
-			QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
 			primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 			primaryStage.setTitle("Question " + (currentQuestionIndex + 1) + "/" + numQuestions);
 			if (currentQuestionIndex == numQuestions - 1)
