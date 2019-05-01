@@ -58,6 +58,7 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 			else {//If none of the entries are null, add a parse entry
 				ParseEntry pe = new ParseEntry(InsertQuestionScreen.topic.getText(), InsertQuestionScreen.question.getText(),
 						InsertQuestionScreen.answers.getText());
+				//Alert for illegal data
 				if(!pe.formatQuestion()) {
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Illegally Formatted Data");
@@ -66,8 +67,21 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 							+ " that are correctly formatted.");
 					alert.showAndWait();
 				}
-				//Check for a parse exception?
 				
+				//Add question to hash table
+				try {
+					Main.questionTable.insertQuestion(pe.getQuestionObject());
+				} catch (IllegalNullKeyException e) {
+
+				}
+				
+				//Return to main menu after 
+				Group parent = new Group();
+				OpeningScreen os = new OpeningScreen(parent);
+				Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				primaryStage.setScene(os.getScene());
+				primaryStage.setTitle(os.getTitle());
+				//Check for a parse exception?
 			}
 		}
 		//Main Menu Button is clicked
@@ -80,3 +94,4 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 		}
 	}
 }
+
