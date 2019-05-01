@@ -47,7 +47,6 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 				for (int i = 0; i < selected.size(); i++) {
 					// assures correct number of questions with equal distribution of topics
 					Main.qd.addQuestions(selected.get(i), (numQuestions / (selected.size() - i)));
-					System.out.println(numQuestions / (selected.size() - i));
 					numQuestions -= (numQuestions / (selected.size() - i));
 				}
 			} catch (IndexOutOfBoundsException e) { 
