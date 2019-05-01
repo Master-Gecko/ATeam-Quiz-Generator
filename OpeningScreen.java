@@ -115,7 +115,7 @@ public class OpeningScreen extends Scene{
 		root.add(insertQuestion, 2, 3);
 		
 		//Instruction Label
-		root.add(instructionLabel, 2, 0);
+		root.add(instructionLabel, 0, 2);
 		
 		//Create the scene with the style sheet
 		openingScreen = new Scene(root, 800, 600);
