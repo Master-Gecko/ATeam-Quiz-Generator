@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.json.simple.parser.ParseException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,7 +36,7 @@ public class lafHandler implements EventHandler<ActionEvent> {
       fileChooser.getExtensionFilters().addAll(new ExtensionFilter("JSON Files", "*.json"));
       fileChooser.setInitialDirectory(new File("."));
       // opens the new window in program's directory and stores the choosen file
-      this.selectedFile = fileChooser.showOpenDialog(Main.getWindow());
+      lafHandler.selectedFile = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
       if (selectedFile != null) {
         tf.setText(selectedFile.getName());
       }
@@ -44,21 +45,19 @@ public class lafHandler implements EventHandler<ActionEvent> {
     if (b.getText().equals("Import File")) {
       if (selectedFile != null) {
         try {
-          FileIn fileIn = new FileIn(selectedFile.getAbsolutePath());
+          FileIn fileIn = new FileIn(selectedFile.getAbsolutePath(), Main.questionTable);
           selectedFile = null;
           tf.clear();
         } catch (Exception e) {
           tf.setText("Could Not Parse File");
-          System.out.println(e.getMessage());
         }
       }
       try {
-        FileIn fileIn = new FileIn(tf.getText());
+        FileIn fileIn = new FileIn(tf.getText(), Main.questionTable);
         selectedFile = null;
         tf.clear();
       } catch (Exception e) {
         tf.setText("Could Not Parse File");
-        System.out.println(e.getMessage());
       }
     }
   }

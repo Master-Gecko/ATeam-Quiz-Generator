@@ -74,6 +74,13 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 			primaryStage.setScene(iqs.getScene());
 			primaryStage.setTitle(iqs.getTitle());
 		}
+		else if (b.getText().equals("Load questions from file")) {
+          Group parent = new Group();
+          LoadAdditionalFileScreen lafs = new LoadAdditionalFileScreen(parent);
+          Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+          primaryStage.setScene(lafs.getScene());
+          primaryStage.setTitle(lafs.getTitle());
+      }
 	}
 
 	}

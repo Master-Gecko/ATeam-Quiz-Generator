@@ -33,6 +33,7 @@ public class Main extends Application {
 	//Scene openingScreen, manualNewQuestionScreen, loadAdditionalTopicFileScreen;
 	OpeningScreen os;
 	InsertQuestionScreen iqs;
+	LoadAdditionalFileScreen lafs;
 	//Scene questionScreen, scoreScreen, goodbyeScreen;
 	OpeningScreenHandler oHandler;
 	static public HashTable<Question> questionTable;

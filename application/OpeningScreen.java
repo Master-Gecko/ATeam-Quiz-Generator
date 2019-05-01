@@ -43,7 +43,7 @@ public class OpeningScreen extends Scene{
 		super(parent);
 	  
 	  	//Set Title
-	  	title = "CS 400 Quiz";
+	  	title = "CS 400 Quiz Generator";
 	  	
 	  	//Create a GridPane
 	  	GridPane root = new GridPane();
@@ -60,6 +60,7 @@ public class OpeningScreen extends Scene{
 		//startQuiz.setPrefSize(250, 250);
 		startQuiz.setOnAction(new OpeningScreenHandler(startQuiz));
 		Button loadTopic = new Button("Load questions from file");
+		loadTopic.setOnAction(new OpeningScreenHandler(loadTopic));
 		Button insertQuestion = new Button("Insert another\nquestion");
 		insertQuestion.setOnAction(new OpeningScreenHandler(insertQuestion));
 		Label numQuestions = new Label("Number of\nQuestions");
