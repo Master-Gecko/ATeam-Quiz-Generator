@@ -61,6 +61,7 @@ public class QuizDriver {
 	 */
 	void addQuestions(String topic, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
 		if (Main.questionTable.getQuestionsForTopic(topic).size() < numberOfQuestions) { // not enough questions for this topic
+			quiz = new ArrayList<Question>();
 			throw new IndexOutOfBoundsException();
 		}
 		ArrayList<Question> topicQuestions = new ArrayList<Question>(Main.questionTable.getQuestionsForTopic(topic));
