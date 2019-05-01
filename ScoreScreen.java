@@ -45,9 +45,11 @@ public class ScoreScreen extends Scene {
 			
 			//Exit quiz button
 			exitQuiz = new Button("Exit Quiz");
-
+			exitQuiz.setOnAction(new ScoreScreenHandler(exitQuiz));
+			
 			//Try another quiz
 			Button anotherQuiz = new Button("Try Another Quiz");
+			anotherQuiz.setOnAction(new ScoreScreenHandler(anotherQuiz));
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {

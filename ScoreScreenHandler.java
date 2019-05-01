@@ -25,8 +25,12 @@ public class ScoreScreenHandler implements EventHandler<ActionEvent> {
 		this.b = b;
 	}
 
+	/**
+	 * Handler method for buttons pressed
+	 */
 	@Override
 	public void handle(ActionEvent event) {
+
 		//Switch to OpeningScreen
 		if (b.getText().equals("Try Another Quiz")) {
 			Group parent = new Group();
