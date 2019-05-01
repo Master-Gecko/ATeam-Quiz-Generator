@@ -1,4 +1,4 @@
-ppackage application;
+package application;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 			try {
 				numQuestions = Integer.parseInt(OpeningScreen.number.getText());
 			} catch (NumberFormatException e) {
-				OpeningScreen.instructionLabel.setText("Enter the \n# of Questions");
+				OpeningScreen.instructionLabel.setText("Enter an (integer) number of questions.");
 				return;
 			}
 			ObservableList<String> selected = OpeningScreen.topics.getSelectionModel().getSelectedItems();
@@ -47,7 +47,6 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 				for (int i = 0; i < selected.size(); i++) {
 					// assures correct number of questions with equal distribution of topics
 					Main.qd.addQuestions(selected.get(i), (numQuestions / (selected.size() - i)));
-					System.out.println(numQuestions / (selected.size() - i));
 					numQuestions -= (numQuestions / (selected.size() - i));
 				}
 			} catch (IndexOutOfBoundsException e) { 
@@ -61,13 +60,6 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			Main.qd.startQuiz(primaryStage);
 		}
-//		else if (b.getText().equals("Load another topic")) {
-//			Group parent = new Group();
-//			LoadAdditionalTopicScreen lats = new LoadAdditionalTopicScreen(parent);
-//			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//			primaryStage.setScene(lats.getScene());
-//			primaryStage.setTitle(lats.getTitle());
-//		}
 		else if (b.getText().equals("Insert Another\n     Question")) {
 			Group parent = new Group();
 			InsertQuestionScreen iqs = new InsertQuestionScreen(parent);
@@ -85,4 +77,3 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	}
 
 	}
-

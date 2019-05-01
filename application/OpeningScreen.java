@@ -1,7 +1,6 @@
 package application;
 
 import java.io.PrintWriter;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +34,9 @@ public class OpeningScreen extends Scene{
   private Scene openingScreen;
   private String title;
   static Button startQuiz;
+  static Button exitQuiz;
+  static Button loadTopic;
+  static Button insertQuestion;
   static ListView<String> topics;
   static TextField number;
   static Label instructionLabel;
@@ -50,34 +52,45 @@ public class OpeningScreen extends Scene{
 		
 		//Create buttons and labels
 		ObservableList<String> options = FXCollections.observableArrayList(Main.questionTable.getAllTopics());
-        //ComboBox<String> topics = new ComboBox<String>(options);
 		topics = new ListView<String>(options);
 		topics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		topics.setMaxHeight(150);
-		Label topicsLabel= new Label("Topics of Quiz");
+		Label topicsLabel= new Label("\tTopics of Quiz");
+		
 		startQuiz = new Button("Start\nQuiz");
 		startQuiz.setStyle("-fx-font-size: 60;");
-		//startQuiz.setPrefSize(250, 250);
 		startQuiz.setOnAction(new OpeningScreenHandler(startQuiz));
-		Button loadTopic = new Button("Load questions from file");
+		
+		exitQuiz = new Button("Close Window");
+		exitQuiz.setOnAction(new OpeningScreenHandler(exitQuiz));
+		
+		loadTopic = new Button("Load Questions\n      From File");
 		loadTopic.setOnAction(new OpeningScreenHandler(loadTopic));
-		Button insertQuestion = new Button("Insert another\nquestion");
+		
+		insertQuestion = new Button("Insert Another\n     Question");
 		insertQuestion.setOnAction(new OpeningScreenHandler(insertQuestion));
-		Label numQuestions = new Label("Number of\nQuestions");
+		
+		Label numQuestions = new Label("Enter the \n# of Questions");
 		number = new TextField();
 		HBox qNumber = new HBox();
+		
 		qNumber.setAlignment(Pos.CENTER);
 		qNumber.setSpacing(10);
 		qNumber.getChildren().addAll(numQuestions,number);
-		if (Main.questionTable.getNumQs() == 0)
-			instructionLabel = new Label("Questions must be added before starting the quiz.");
-		else
+		
+		
+		//Informational message
+		if (Main.questionTable.getNumQs() == 0) {
+			instructionLabel = new Label("Questions must be added\nbefore starting the quiz.");
+			instructionLabel.setStyle("-fx-font-size: 12;");
+		}
+		else {
 			instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
-		instructionLabel.setWrapText(true);
+			instructionLabel.setWrapText(true);
+		}
 		
 		//Set padding and gaps
 		root.setPadding(new Insets(20, 20, 20, 20));
-		//root.setGridLinesVisible(true);
 		root.setVgap(5);
 		root.setHgap(5);
 		
@@ -87,6 +100,9 @@ public class OpeningScreen extends Scene{
 		
 		//Start Quiz Button
 		root.add(startQuiz, 1, 2);
+		
+		//Exit quiz button
+		root.add(exitQuiz, 1, 16);
 		
 		//Number of Questions
 		root.add(qNumber, 0, 3);

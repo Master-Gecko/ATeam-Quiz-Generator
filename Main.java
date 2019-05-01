@@ -1,5 +1,5 @@
- package application;
-	
+package application;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +49,7 @@ public class Main extends Application {
 			window.setMinHeight(600);
 			window.setMinWidth(800);
 			window.setMaxHeight(800);
-			window.setMaxWidth(800);
+			window.setMaxWidth(1000);
 			
 			parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
