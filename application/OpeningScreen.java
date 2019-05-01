@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  * Filename:   OpeningScreen.java
  * Project:    ATeam Quiz Generator
  * Course:     cs400 Spring 2019
- * Authors:    Titus Smith, Eddie Morelli
+ * Authors:    Titus Smith, Eddie Morelli, Sammy Zopf
  * 
  */
 public class OpeningScreen extends Scene{

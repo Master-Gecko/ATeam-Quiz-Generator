@@ -15,7 +15,7 @@ import javafx.scene.Node;
 /**
  * 
  * Filename: OpeningScreenHandler.java Project: ATeam Quiz Generator Course: cs400 Spring 2019
- * Authors: Titus Smith, Eddie Morelli
+ * Authors: Titus Smith, Eddie Morelli, Sammy Zopf
  * 
  */
 class OpeningScreenHandler implements EventHandler<ActionEvent> {
