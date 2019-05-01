@@ -56,7 +56,7 @@ public class OpeningScreen extends Scene{
 		topics = new ListView<String>(options);
 		topics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		topics.setMaxHeight(150);
-		Label topicsLabel= new Label("Topics of Quiz");
+		Label topicsLabel= new Label("\tTopics of Quiz");
 		
 		startQuiz = new Button("Start\nQuiz");
 		startQuiz.setStyle("-fx-font-size: 60;");
@@ -65,13 +65,13 @@ public class OpeningScreen extends Scene{
 		exitQuiz = new Button("Close Window");
 		exitQuiz.setOnAction(new OpeningScreenHandler(exitQuiz));
 		
-		loadTopic = new Button("Load questions from file");
+		loadTopic = new Button("Load Questions\n      From File");
 		loadTopic.setOnAction(new OpeningScreenHandler(loadTopic));
 		
-		insertQuestion = new Button("Insert another\nquestion");
+		insertQuestion = new Button("Insert Another\n     Question");
 		insertQuestion.setOnAction(new OpeningScreenHandler(insertQuestion));
 		
-		Label numQuestions = new Label("Number of\nQuestions");
+		Label numQuestions = new Label("Enter the \n# of Questions");
 		number = new TextField();
 		HBox qNumber = new HBox();
 		
@@ -81,11 +81,14 @@ public class OpeningScreen extends Scene{
 		
 		
 		//Informational message
-		if (Main.questionTable.getNumQs() == 0)
-			instructionLabel = new Label("Questions must be added before starting the quiz.");
-		else
+		if (Main.questionTable.getNumQs() == 0) {
+			instructionLabel = new Label("Questions must be added\nbefore starting the quiz.");
+			instructionLabel.setStyle("-fx-font-size: 12;");
+		}
+		else {
 			instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
-		instructionLabel.setWrapText(true);
+			instructionLabel.setWrapText(true);
+		}
 		
 		//Set padding and gaps
 		root.setPadding(new Insets(20, 20, 20, 20));
@@ -112,7 +115,7 @@ public class OpeningScreen extends Scene{
 		root.add(insertQuestion, 2, 3);
 		
 		//Instruction Label
-		root.add(instructionLabel, 0, 2);
+		root.add(instructionLabel, 2, 0);
 		
 		//Create the scene with the style sheet
 		openingScreen = new Scene(root, 800, 600);
