@@ -83,6 +83,9 @@ public class QuizDriver {
 		qs = new QuestionScreen(parent);
 		primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 		primaryStage.setTitle("Question " + 1 + "/" + numQuestions);
+		if (quiz.size() == 1) {
+			QuestionScreen.nextButton.setText("Submit Quiz");
+		}
 	}
 	
 	/**
