@@ -2,10 +2,12 @@ package application;
 
 import java.util.ArrayList;
 
+import org.json.simple.parser.ParseException;
+
 /**
  * 
  * Filename: ParseEntry.java Project: ATeam Quiz Generator Course: cs400 Spring
- * 2019 Authors: Titus Smith
+ * 2019 Authors: Titus Smith, Owen Massey
  * 
  * Called by InsertScreenHandler, creates question and answers object and then
  * adds them to the question hash table
@@ -29,20 +31,35 @@ public class ParseEntry {
 		this.question = question;
 		this.answerUnparsed = answerUnparsed;
 		this.ParsedAnswers = new ArrayList<Answer>();
-		String[] answers = answerUnparsed.split("\n");
-		for (String ans : answers) {
-			String[] answerParsed = ans.split(",");
-			if (answerParsed[0].toUpperCase().equals("T"))
-				ParsedAnswers.add(new Answer(true, answerParsed[1]));
-			else
-				ParsedAnswers.add(new Answer(false, answerParsed[1]));
-		}
+		
+		
+		
 //		try {
 //			Main.qd.addQuestions(topic, ParsedAnswers.size());
 //		} catch (IllegalNullKeyException | KeyNotFoundException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+	}
+	/**
+	 * Formats question, returns false if an exception is thrown
+	 * Adds answers if not
+	 * @return
+	 */
+	boolean formatQuestion() {
+		String[] answers = answerUnparsed.split("\n");
+		try {
+			for (String ans : answers) {
+				String[] answerParsed = ans.split(",");
+				if (answerParsed[0].toUpperCase().equals("T"))
+					ParsedAnswers.add(new Answer(true, answerParsed[1]));
+				else
+					ParsedAnswers.add(new Answer(false, answerParsed[1]));
+			}
+			return true;
+		}catch(Exception e) {//If exception is thrown, then program "crashed"			
+			return false;//Inform handler that question crashed
+		}
 	}
 
 	public String getQuestion() {

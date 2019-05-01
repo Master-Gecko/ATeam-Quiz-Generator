@@ -28,10 +28,15 @@ import javafx.scene.Node;
  * 
  */
 class SaveScreenHandler implements EventHandler<ActionEvent> {
+	//Button Fields
 	Button b;
 	TextField tf;
 	FileOut fo;
 	
+	/**
+	 * Constructor
+	 * @param b
+	 */
 	SaveScreenHandler(Button b) {
 		this.b = b;
 	}
@@ -50,6 +55,8 @@ class SaveScreenHandler implements EventHandler<ActionEvent> {
 		
 		//Else, try to save file
 		else if(!tf.getText().isEmpty()) {
+			
+			//Display all alerts
 			try {
 				FileOut fo = new FileOut(tf.getText(), Main.questionTable);
 			} catch (FileNotFoundException e) {

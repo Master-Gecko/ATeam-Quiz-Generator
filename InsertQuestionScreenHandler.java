@@ -22,9 +22,15 @@ import javafx.scene.Node;
  * 
  */
 class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
+	
+	//Button field
 	Button b;
 	
 	
+	/**
+	 * Constructor
+	 * @param b
+	 */
 	InsertQuestionScreenHandler(Button b) {
 		this.b = b;
 	}
@@ -34,6 +40,8 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event) {
+		
+		//Submit button is clicked
 		if (b.getText().equals("Submit!")) {
 			
 			//Check to make sure that none of the entries are null
@@ -50,11 +58,19 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 			else {//If none of the entries are null, add a parse entry
 				ParseEntry pe = new ParseEntry(InsertQuestionScreen.topic.getText(), InsertQuestionScreen.topic.getText(),
 						InsertQuestionScreen.question.getText());
-
+				if(!pe.formatQuestion()) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Illegally Formatted Data");
+					alert.setHeaderText(null);
+					alert.setContentText("Please check to make sure you have topic, question, and answers fields"
+							+ " that are correctly formatted.");
+					alert.showAndWait();
+				}
 				//Check for a parse exception?
 				
 			}
 		}
+		//Main Menu Button is clicked
 		else if(b.getText().equals("Return to Main Menu")) {
 			Group parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
