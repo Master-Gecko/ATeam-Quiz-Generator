@@ -86,7 +86,6 @@ public class QuizDriver {
 		if (quiz.size() == 1) {
 			QuestionScreen.nextButton.setText("Submit Quiz");
 		}
-		currentQuestionIndex++;
 	}
 	
 	/**
