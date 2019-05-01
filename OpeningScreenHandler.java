@@ -1,6 +1,5 @@
 package application;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,12 +29,13 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		if (b.getText().equals("Start\nQuiz")) {
+			Main.qd = new QuizDriver();
 			// parse number of questions and topics
 			int numQuestions;
 			try {
 				numQuestions = Integer.parseInt(OpeningScreen.number.getText());
 			} catch (NumberFormatException e) {
-				OpeningScreen.instructionLabel.setText("Enter the \n# of Questions");
+				OpeningScreen.instructionLabel.setText("Enter an (integer) number of questions.");
 				return;
 			}
 			ObservableList<String> selected = OpeningScreen.topics.getSelectionModel().getSelectedItems();
@@ -47,7 +47,6 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 				for (int i = 0; i < selected.size(); i++) {
 					// assures correct number of questions with equal distribution of topics
 					Main.qd.addQuestions(selected.get(i), (numQuestions / (selected.size() - i)));
-					System.out.println(numQuestions / (selected.size() - i));
 					numQuestions -= (numQuestions / (selected.size() - i));
 				}
 			} catch (IndexOutOfBoundsException e) { 
@@ -68,23 +67,20 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 //			primaryStage.setScene(lats.getScene());
 //			primaryStage.setTitle(lats.getTitle());
 //		}
-		else if (b.getText().equals("Insert Another\n     Question")) {
+		else if (b.getText().equals("Insert another\nquestion")) {
 			Group parent = new Group();
 			InsertQuestionScreen iqs = new InsertQuestionScreen(parent);
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			primaryStage.setScene(iqs.getScene());
 			primaryStage.setTitle(iqs.getTitle());
 		}
-		else if (b.getText().equals("Load Questions\n      From File")) {
+		else if (b.getText().equals("Load questions from file")) {
           Group parent = new Group();
           LoadAdditionalFileScreen lafs = new LoadAdditionalFileScreen(parent);
           Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
           primaryStage.setScene(lafs.getScene());
           primaryStage.setTitle(lafs.getTitle());
       }
-		else if(b.getText().equals("Close Window")) {
-			Platform.exit();
-		}
 	}
 
 	}
