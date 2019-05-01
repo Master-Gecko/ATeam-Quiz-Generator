@@ -41,7 +41,7 @@ public class ScoreScreen extends Scene {
 			GridPane root = new GridPane();
 			
 			//Result message
-			Text result = new Text("You got "+Main.qd.getQuizScore()+"/"+Main.questionTable.getNumQs());
+			Text result = new Text("You got "+Main.qd.getNumCorrect()+"/"+Main.qd.getNumQuestions());
 			
 			//Exit quiz button
 			exitQuiz = new Button("Exit Quiz");

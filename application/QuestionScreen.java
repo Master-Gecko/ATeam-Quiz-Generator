@@ -14,6 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * 
  * Filename:   QuestionScreen.java
@@ -106,7 +110,8 @@ public class QuestionScreen extends Scene {
 		}
 		else { // question has image
 			
-			qImage = new Image(q.getImagePath());
+			File file = new File(q.getImagePath());
+	        qImage = new Image(file.toURI().toString());
 			qImageView = new ImageView(qImage);
 			
 		    //setting the fit height and width of the image view 
