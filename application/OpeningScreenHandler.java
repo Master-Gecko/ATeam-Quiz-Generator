@@ -1,4 +1,4 @@
-package application;
+ppackage application;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 			try {
 				numQuestions = Integer.parseInt(OpeningScreen.number.getText());
 			} catch (NumberFormatException e) {
-				OpeningScreen.instructionLabel.setText("Enter an (integer) number of questions.");
+				OpeningScreen.instructionLabel.setText("Enter the \n# of Questions");
 				return;
 			}
 			ObservableList<String> selected = OpeningScreen.topics.getSelectionModel().getSelectedItems();
@@ -68,14 +68,14 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 //			primaryStage.setScene(lats.getScene());
 //			primaryStage.setTitle(lats.getTitle());
 //		}
-		else if (b.getText().equals("Insert another\nquestion")) {
+		else if (b.getText().equals("Insert Another\n     Question")) {
 			Group parent = new Group();
 			InsertQuestionScreen iqs = new InsertQuestionScreen(parent);
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			primaryStage.setScene(iqs.getScene());
 			primaryStage.setTitle(iqs.getTitle());
 		}
-		else if (b.getText().equals("Load questions from file")) {
+		else if (b.getText().equals("Load Questions\n      From File")) {
           Group parent = new Group();
           LoadAdditionalFileScreen lafs = new LoadAdditionalFileScreen(parent);
           Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -85,3 +85,4 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 	}
 
 	}
+
