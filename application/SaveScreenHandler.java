@@ -40,6 +40,11 @@ class SaveScreenHandler implements EventHandler<ActionEvent> {
 	SaveScreenHandler(Button b) {
 		this.b = b;
 	}
+	
+	SaveScreenHandler(Button b, TextField tf) {
+		this.b = b;
+		this.tf = tf;
+	}
 		
 	/**
 	 * This handler method either saves the file file, 

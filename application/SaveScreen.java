@@ -57,7 +57,7 @@ public class SaveScreen extends Scene {
 			
 			//Submit button
 			submitButton = new Button("Submit!");
-			submitButton.setOnAction(new InsertQuestionScreenHandler(submitButton));
+			submitButton.setOnAction(new SaveScreenHandler(submitButton, fileName));
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {

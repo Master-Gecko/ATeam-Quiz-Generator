@@ -56,8 +56,8 @@ class InsertQuestionScreenHandler implements EventHandler<ActionEvent> {
 				alert.showAndWait();
 			}
 			else {//If none of the entries are null, add a parse entry
-				ParseEntry pe = new ParseEntry(InsertQuestionScreen.topic.getText(), InsertQuestionScreen.topic.getText(),
-						InsertQuestionScreen.question.getText());
+				ParseEntry pe = new ParseEntry(InsertQuestionScreen.topic.getText(), InsertQuestionScreen.question.getText(),
+						InsertQuestionScreen.answers.getText());
 				if(!pe.formatQuestion()) {
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Illegally Formatted Data");
