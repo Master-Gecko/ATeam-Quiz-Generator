@@ -40,6 +40,7 @@ public class OpeningScreen extends Scene{
   static ListView<String> topics;
   static TextField number;
   static Label instructionLabel;
+  static Label totalNumQuestions;
   
 	public OpeningScreen(Parent parent) {
 		super(parent);
@@ -52,6 +53,7 @@ public class OpeningScreen extends Scene{
 		
 		//Create buttons and labels
 		ObservableList<String> options = FXCollections.observableArrayList(Main.questionTable.getAllTopics());
+		FXCollections.sort(options);
 		topics = new ListView<String>(options);
 		topics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		topics.setMaxHeight(150);
@@ -73,6 +75,12 @@ public class OpeningScreen extends Scene{
 		Label numQuestions = new Label("Enter the number\n    of Questions:");
 		number = new TextField();
 		VBox qNumber = new VBox();
+		
+		totalNumQuestions = new Label("There are " + Main.questionTable.getNumQs() + " questions in the database.");
+		totalNumQuestions.setMaxWidth(250);
+		totalNumQuestions.setMinWidth(250);
+		totalNumQuestions.setMinHeight(150);
+		totalNumQuestions.setWrapText(true);
 		
 		qNumber.setAlignment(Pos.CENTER);
 		qNumber.setSpacing(10);
@@ -115,6 +123,9 @@ public class OpeningScreen extends Scene{
 		
 		//Instruction Label
 		root.add(instructionLabel, 0, 2);
+		
+		//Total Number of Questions Label
+		root.add(totalNumQuestions, 1, 1);
 		
 		//Create the scene with the style sheet
 		openingScreen = new Scene(root, 800, 600);
