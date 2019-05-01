@@ -42,6 +42,10 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
         OpeningScreen.instructionLabel.setText("Choose topic(s).");
         return;
       }
+      if (numQuestions <= 0) {
+    	  OpeningScreen.instructionLabel.setText("Must have at least one question.");
+          return;
+      }
       try {
         Main.qd.addQuestions(selected, numQuestions);
       } catch (IndexOutOfBoundsException e) {
