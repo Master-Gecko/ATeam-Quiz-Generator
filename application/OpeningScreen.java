@@ -82,7 +82,7 @@ public class OpeningScreen extends Scene{
 		//Informational message
 		if (Main.questionTable.getNumQs() == 0) {
 			instructionLabel = new Label("Questions must be added\nbefore starting the quiz.");
-			instructionLabel.setStyle("-fx-font-size: 12;");
+			//instructionLabel.setStyle("-fx-font-size: 12;");
 		}
 		else {
 			instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
