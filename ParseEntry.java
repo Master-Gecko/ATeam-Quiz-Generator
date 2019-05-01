@@ -21,7 +21,6 @@ public class ParseEntry {
 
 	/**
 	 * Constructor
-	 * 
 	 * @param topic
 	 * @param question
 	 * @param answerUnparsed
@@ -31,15 +30,7 @@ public class ParseEntry {
 		this.question = question;
 		this.answerUnparsed = answerUnparsed;
 		this.ParsedAnswers = new ArrayList<Answer>();
-		
-		
-		
-//		try {
-//			Main.qd.addQuestions(topic, ParsedAnswers.size());
-//		} catch (IllegalNullKeyException | KeyNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// doesn't have metadata or image path
 	}
 	/**
 	 * Formats question, returns false if an exception is thrown
@@ -62,11 +53,11 @@ public class ParseEntry {
 		}
 	}
 
+	/**
+	 * Getter method for the test class
+	 * @return
+	 */
 	public String getQuestion() {
 		return "Topic: " + topic + " Question: " + question + " Answers: " + ParsedAnswers.toString();
 	}
-
-	// Needs to call //Main.qd.addQuestions(topic, numberOfQuestions);
-	// doesn't have metadata or image path
-	// Check for a parse exception?
 }

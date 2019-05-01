@@ -19,43 +19,47 @@ import javafx.scene.text.Text;
 
 /**
  * 
- * Filename:   ScoreScreen.java
+ * Filename:   SaveScreen.java
  * Project:    ATeam Quiz Generator
  * Course:     cs400 Spring 2019
  * Authors:    Titus Smith
  * 
- * Creates a scene for displaying the user's score and a 
- * few user prompts, returning the scene. 
+ * Creates a scene for saving the user's questions,
+ * returning the scene
  */
-public class ScoreScreen extends Scene {
+public class SaveScreen extends Scene {
 	
 	  //Node fields
-	  private Scene scoreScreen;
+	  private Scene saveScreen;
 	  private String title;
-	  static Button exitQuiz;
+	  static Button confirmExit;
+	  static TextField fileName;
 	  
-	  public ScoreScreen(Parent parent) {
+	  
+	  public SaveScreen(Parent parent) {
+
 		  super(parent);
-		   title = "Your Score";
+		   title = "Save Quiz Questions Before Leaving?";
+		   
 		    // Create a GridPane
 			GridPane root = new GridPane();
 			
-			//Result message
-			Text result = new Text("You got "+Main.qd.getQuizScore()+"/"+Main.questionTable.getNumQs());
-			
-			//Exit quiz button
-			exitQuiz = new Button("Exit Quiz");
+			//Save File Message
+			Text message = new Text("Yes! Enter JSON file name\n\tto save to below");
+			fileName = new TextField();
+			fileName.setPromptText("Review-Session-1.json"); //to set the hint text
+			fileName.setMinWidth(250);
 
-			//Try another quiz
-			Button anotherQuiz = new Button("Try Another Quiz");
+			//Confirm Exit
+			confirmExit = new Button("No thanks!");
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
 		         ColumnConstraints column = new ColumnConstraints(160);
 		         root.getColumnConstraints().add(column);
 		     }
-			for (int i = 0; i < 6; i++) {
-		         RowConstraints row = new RowConstraints(100);
+			for (int i = 0; i < 200; i++) {
+		         RowConstraints row = new RowConstraints(3);
 		         root.getRowConstraints().add(row);
 		     }
 			//Set padding and gaps
@@ -63,21 +67,20 @@ public class ScoreScreen extends Scene {
 			root.setVgap(5);
 			
 			//Format the boxes
-			root.add(result, 2, 0);
-			root.add(exitQuiz, 0, 4);
-			root.add(anotherQuiz, 3, 4);
+			root.add(message, 0, 5);
+			root.add(fileName, 0, 12);
+			root.add(confirmExit, 3, 12);
 			
-			scoreScreen = new Scene(root, 800,600);
-			scoreScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+			saveScreen = new Scene(root, 800,600);
+			saveScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
-	
 	
 	/**
 	 * Getter method for scene
 	 * @return
 	 */
 	public Scene getScene() {
-		return this.scoreScreen;
+		return this.saveScreen;
 	}
 	
 	/**
