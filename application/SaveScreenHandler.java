@@ -82,6 +82,7 @@ class SaveScreenHandler implements EventHandler<ActionEvent> {
 				alert.setContentText("Unable to correctly parse data");
 				alert.showAndWait();
 			}
+			Platform.exit();
 		}
 	}
 }
