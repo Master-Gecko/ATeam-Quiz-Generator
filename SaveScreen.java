@@ -52,6 +52,7 @@ public class SaveScreen extends Scene {
 
 			//Confirm Exit
 			confirmExit = new Button("No thanks!");
+			confirmExit.setOnAction(new SaveScreenHandler(confirmExit));
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
