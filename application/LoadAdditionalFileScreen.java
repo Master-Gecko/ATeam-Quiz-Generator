@@ -44,6 +44,7 @@ public class LoadAdditionalFileScreen extends Scene {
     
     top.getChildren().addAll(insertFile, filePath);
     root.setPadding(new Insets(25));
+    root.setVgap(10);
     root.add(top, 0, 1);
     
     Button button = new Button();
@@ -59,9 +60,10 @@ public class LoadAdditionalFileScreen extends Scene {
     root.add(button, 0, 3);
     
     Label hint = new Label("NOTE: When searching for a file, provide the relative\rpath from the program's directory.");
+    hint.setStyle("-fx-font-style: italic;");
     root.add(hint, 0, 0);
     
-    root.setGridLinesVisible(true);    
+    //root.setGridLinesVisible(true);    
     lafScene = new Scene(root, 800, 600);
     lafScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
   }
