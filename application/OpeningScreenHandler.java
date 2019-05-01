@@ -43,13 +43,10 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
         return;
       }
       try {
-        for (int i = 0; i < selected.size(); i++) {
-          // assures correct number of questions with equal distribution of topics
-          Main.qd.addQuestions(selected.get(i), (numQuestions / (selected.size() - i)));
-          numQuestions -= (numQuestions / (selected.size() - i));
-        }
+        Main.qd.addQuestions(selected, numQuestions);
       } catch (IndexOutOfBoundsException e) {
-        OpeningScreen.instructionLabel.setText("Not enough questions for one or more topics.");
+        OpeningScreen.instructionLabel.setText("Not enough questions uploaded.");
+        return;
       } catch (Exception e) {
         // this should never be reached, only here to avoid compiler error
         System.out.println("unexpected exception");

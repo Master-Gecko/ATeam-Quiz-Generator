@@ -2,8 +2,10 @@ package application;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
@@ -59,17 +61,19 @@ public class QuizDriver {
 	 * @throws KeyNotFoundException when there are no topics in the question HashTable with the given topic (should not happen)
 	 * @throws IllegalNullKeyException when the given topic is null (should not happen)
 	 */
-	void addQuestions(String topic, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
-		if (Main.questionTable.getQuestionsForTopic(topic).size() < numberOfQuestions) { // not enough questions for this topic
-			quiz = new ArrayList<Question>();
+	void addQuestions(ObservableList<String> topics, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
+		ArrayList<Question> allQuestionsForChosenTopics = new ArrayList<Question>();
+		for (int i = 0; i < topics.size(); i++) {
+			allQuestionsForChosenTopics.addAll(Main.questionTable.getQuestionsForTopic(topics.get(i)));
+		}
+		if (allQuestionsForChosenTopics.size() < numberOfQuestions) { // not enough questions for this topic
 			throw new IndexOutOfBoundsException();
 		}
-		ArrayList<Question> topicQuestions = new ArrayList<Question>(Main.questionTable.getQuestionsForTopic(topic));
 		Random r = new Random(); // random object to randomly select questions from question HashTable
 		Question addToQuiz;
 		for (int i = 0; i < numberOfQuestions; i++) {
-			addToQuiz = topicQuestions.get(r.nextInt(topicQuestions.size()));
-			topicQuestions.remove(addToQuiz);
+			addToQuiz = allQuestionsForChosenTopics.get(r.nextInt(allQuestionsForChosenTopics.size()));
+			allQuestionsForChosenTopics.remove(addToQuiz);
 			quiz.add(addToQuiz);
 		}
 	}
