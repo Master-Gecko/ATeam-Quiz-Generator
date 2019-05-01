@@ -33,6 +33,7 @@ public class SaveScreen extends Scene {
 	  private Scene saveScreen;
 	  private String title;
 	  static Button confirmExit;
+	  static Button submitButton;
 	  static TextField fileName;
 	  
 	  
@@ -52,6 +53,11 @@ public class SaveScreen extends Scene {
 
 			//Confirm Exit
 			confirmExit = new Button("No thanks!");
+			confirmExit.setOnAction(new SaveScreenHandler(confirmExit));
+			
+			//Submit button
+			submitButton = new Button("Submit!");
+			submitButton.setOnAction(new InsertQuestionScreenHandler(submitButton));
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
@@ -70,6 +76,7 @@ public class SaveScreen extends Scene {
 			root.add(message, 0, 5);
 			root.add(fileName, 0, 12);
 			root.add(confirmExit, 3, 12);
+			root.add(submitButton, 0, 20);
 			
 			saveScreen = new Scene(root, 800,600);
 			saveScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

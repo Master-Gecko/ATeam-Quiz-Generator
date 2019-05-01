@@ -54,8 +54,7 @@ class SaveScreenHandler implements EventHandler<ActionEvent> {
 			}
 		
 		//Else, try to save file
-		else if(!tf.getText().isEmpty()) {
-			
+		else if(b.getText().equals("Submit!")){
 			//Display all alerts
 			try {
 				FileOut fo = new FileOut(tf.getText(), Main.questionTable);
