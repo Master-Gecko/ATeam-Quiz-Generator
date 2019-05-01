@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -18,16 +19,23 @@ import javafx.scene.text.Text;
 
 /**
  *  * 
- * Filename:   HashTableADT.java
+ * Filename:   InsertQuestionScreen.java
  * Project:    ATeam Quiz Generator
  * Course:     cs400
  * Authors:    Titus Smith
+ * 
+ * Creates a scene for adding a new question, and returns the scene. 
  *
  */
 public class InsertQuestionScreen extends Scene{
 	//private Stage window;
 	  private Scene insertNewQuestionScreen;
 	  private String title;
+	  static TextField topic;
+	  static TextField question;
+	  static TextArea answers;
+	  static Button submitButton;
+	  static Button returnButton;
 	  
 	  public InsertQuestionScreen(Parent parent) {
 		  super(parent);
@@ -36,14 +44,14 @@ public class InsertQuestionScreen extends Scene{
 			GridPane root = new GridPane();
 			
 			//Topic textfield
-			TextField topic = new TextField();
+			topic = new TextField();
 			topic.setPromptText("Topic:"); //to set the hint text
 			topic.setMinWidth(250);
 			
 			//Question textfield
-			TextField question = new TextField();
+			question = new TextField();
 			question.setPromptText("Question:"); //to set the hint text
-			question.setMinWidth(500);
+			question.setMinWidth(250);
 			//Example text
 			Text message = new Text("\t\tList each answer in the form of:\n"
 					+ "'T/F, <Answer>', "
@@ -51,16 +59,26 @@ public class InsertQuestionScreen extends Scene{
 					+ "return.");
 
 			//Answer textarea
-			TextArea answers = new TextArea();
+			answers = new TextArea();
 			answers.setPromptText("T, The Sun came up this morning"
 					+ "\rF, Construction never happens in Madison");
-			answers.setPrefColumnCount(200);
-			answers.setPrefRowCount(100);
+			answers.setPrefRowCount(50);
 			answers.setMinWidth(500);
+			
+			//Submit button
+			submitButton = new Button("Submit!");
+			submitButton.setOnAction(new InsertQuestionScreenHandler(submitButton));
+			
+			//Return button
+			returnButton = new Button("Return to Main Menu");
+			returnButton.setOnAction(new InsertQuestionScreenHandler(returnButton));
+			returnButton.setMinHeight(200);
+			
+			
 			//Set padding and gaps
 			root.setPadding(new Insets(20, 20, 20, 20));
-			//root.setGridLinesVisible(true);
-			root.setVgap(5);		
+			root.setVgap(5);
+			
 			for (int i = 0; i < 5; i++) {
 		         ColumnConstraints column = new ColumnConstraints(160);
 		         root.getColumnConstraints().add(column);
@@ -71,6 +89,8 @@ public class InsertQuestionScreen extends Scene{
 			root.add(question, 1, 5);
 			root.add(message, 1, 9);
 			root.add(answers, 1, 10);
+			root.add(submitButton, 3, 0);
+			root.add(returnButton, 3, 5);
 			
 			insertNewQuestionScreen = new Scene(root, 800,600);
 			insertNewQuestionScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

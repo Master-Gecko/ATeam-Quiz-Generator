@@ -29,28 +29,29 @@ import javafx.scene.text.Text;
  */
 public class ScoreScreen extends Scene {
 	
+	  //Node fields
 	  private Scene scoreScreen;
 	  private String title;
-	  int score = 0;
-	  int totalQuestions = 10;
 	  static Button exitQuiz;
 	  
 	  public ScoreScreen(Parent parent) {
-		  //NEED TO GET SCORE FROM SOMEWHERE
 		  super(parent);
 		   title = "Your Score";
 		    // Create a GridPane
 			GridPane root = new GridPane();
 			
 			//Result message
-			Text result = new Text("You got "+score+"/"+totalQuestions);
+			Text result = new Text("You got "+Main.qd.getQuizScore()+"/"+Main.questionTable.getNumQs());
 			
 			//Exit quiz button
 			exitQuiz = new Button("Exit Quiz");
-
+			exitQuiz.setOnAction(new ScoreScreenHandler(exitQuiz));
+			
 			//Try another quiz
 			Button anotherQuiz = new Button("Try Another Quiz");
-	
+			anotherQuiz.setOnAction(new ScoreScreenHandler(anotherQuiz));
+			
+			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
 		         ColumnConstraints column = new ColumnConstraints(160);
 		         root.getColumnConstraints().add(column);
@@ -72,10 +73,19 @@ public class ScoreScreen extends Scene {
 			scoreScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
 	
+	
+	/**
+	 * Getter method for scene
+	 * @return
+	 */
 	public Scene getScene() {
 		return this.scoreScreen;
 	}
 	
+	/**
+	 * Getter method for title
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}

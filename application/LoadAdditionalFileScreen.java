@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,7 +29,11 @@ import javafx.stage.Window;
 public class LoadAdditionalFileScreen extends Scene {
   private Scene lafScene;
   private String title;
-
+  
+  static Button fileButton;
+  static Button importButton;
+  static Button returnButton;
+  
   public LoadAdditionalFileScreen(Parent parent) {
     super(parent);
 
@@ -47,18 +52,23 @@ public class LoadAdditionalFileScreen extends Scene {
     root.setVgap(10);
     root.add(top, 0, 1);
     
-    Button button = new Button();
-    button.setText("Pick a File From System");
-    lafHandler handler = new lafHandler(button, filePath);
-    button.setOnAction(handler);
-    root.add(button, 0, 2);
+    //Pick a File Button
+    fileButton = new Button();
+    fileButton.setText("Pick a File From System");
+    fileButton.setOnAction(new lafHandler(fileButton, filePath));
+    root.add(fileButton, 0, 2);
     
-    button = new Button();
-    button.setText("Import File");
-    handler = new lafHandler(button, filePath);
-    button.setOnAction(handler);
-    root.add(button, 0, 3);
+    //Import File Button
+    importButton = new Button();
+    importButton.setText("Import File");
+    importButton.setOnAction(new lafHandler(importButton, filePath));
+    root.add(importButton, 0, 3);
     
+    //Return button
+	returnButton = new Button("Return to Main Menu");
+	returnButton.setOnAction(new InsertQuestionScreenHandler(returnButton));
+	root.add(returnButton, 0, 4);
+	
     Label hint = new Label("NOTE: When searching for a file, provide the relative\rpath from the program's directory.");
     hint.setStyle("-fx-font-style: italic;");
     root.add(hint, 0, 0);

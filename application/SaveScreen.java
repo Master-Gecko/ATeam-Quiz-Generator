@@ -29,26 +29,31 @@ import javafx.scene.text.Text;
  */
 public class SaveScreen extends Scene {
 	
+	  //Node fields
 	  private Scene saveScreen;
 	  private String title;
-	  int score = 0;
+	  static Button confirmExit;
+	  static TextField fileName;
+	  
 	  
 	  public SaveScreen(Parent parent) {
-		  //NEED TO GET SCORE FROM SOMEWHERE
+
 		  super(parent);
 		   title = "Save Quiz Questions Before Leaving?";
+		   
 		    // Create a GridPane
 			GridPane root = new GridPane();
 			
 			//Save File Message
 			Text message = new Text("Yes! Enter JSON file name\n\tto save to below");
-			TextField fileName = new TextField();
+			fileName = new TextField();
 			fileName.setPromptText("Review-Session-1.json"); //to set the hint text
 			fileName.setMinWidth(250);
 
 			//Confirm Exit
-			Button exitConfirm = new Button("No thanks!");
-	
+			confirmExit = new Button("No thanks!");
+			
+			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
 		         ColumnConstraints column = new ColumnConstraints(160);
 		         root.getColumnConstraints().add(column);
@@ -64,16 +69,24 @@ public class SaveScreen extends Scene {
 			//Format the boxes
 			root.add(message, 0, 5);
 			root.add(fileName, 0, 12);
-			root.add(exitConfirm, 3, 12);
+			root.add(confirmExit, 3, 12);
 			
 			saveScreen = new Scene(root, 800,600);
 			saveScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 	}
 	
+	/**
+	 * Getter method for scene
+	 * @return
+	 */
 	public Scene getScene() {
 		return this.saveScreen;
 	}
 	
+	/**
+	 * Getter method for title
+	 * @return
+	 */
 	public String getTitle() {
 		return title;
 	}

@@ -5,3 +5,7 @@
 /Answer.class
 /OpeningScreen.class
 /openingScreen.class
+/InsertQuestionScreenHandler.class
+/ParseEntry.class
+/SaveScreenHandler.class
+/ScoreScreenHandler.class
