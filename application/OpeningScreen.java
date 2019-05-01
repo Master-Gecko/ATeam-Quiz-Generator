@@ -70,9 +70,9 @@ public class OpeningScreen extends Scene{
 		insertQuestion = new Button("Insert Another\n     Question");
 		insertQuestion.setOnAction(new OpeningScreenHandler(insertQuestion));
 		
-		Label numQuestions = new Label("Enter the \n# of Questions");
+		Label numQuestions = new Label("Enter the number\n    of Questions:");
 		number = new TextField();
-		HBox qNumber = new HBox();
+		VBox qNumber = new VBox();
 		
 		qNumber.setAlignment(Pos.CENTER);
 		qNumber.setSpacing(10);
@@ -102,7 +102,7 @@ public class OpeningScreen extends Scene{
 		root.add(startQuiz, 1, 2);
 		
 		//Exit quiz button
-		root.add(exitQuiz, 1, 16);
+		root.add(exitQuiz, 1, 5);
 		
 		//Number of Questions
 		root.add(qNumber, 0, 3);
