@@ -32,21 +32,12 @@ public class ScoreScreenHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 
 		//Switch to OpeningScreen
-		if (b.getText().equals("Try Another Quiz")) {
+		if (b.getText().equals("Return to Menu")) {
 			Group parent = new Group();
 			OpeningScreen os = new OpeningScreen(parent);
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			primaryStage.setScene(os.getScene());
 			primaryStage.setTitle(os.getTitle());
-		}
-		
-		//Switch to SaveScreen
-		else if(b.getText().equals("Exit Quiz")) {
-			Group parent = new Group();
-			SaveScreen ss = new SaveScreen(parent);
-			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-			primaryStage.setScene(ss.getScene());
-			primaryStage.setTitle(ss.getTitle());
 		}
 	}
 }
