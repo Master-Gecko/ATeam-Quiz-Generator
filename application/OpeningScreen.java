@@ -49,7 +49,7 @@ public class OpeningScreen extends Scene{
 	  	GridPane root = new GridPane();
 		
 		//Create buttons and labels
-		ObservableList<String> options = FXCollections.observableArrayList("Science", "Math", "English", "CS", "History");
+		ObservableList<String> options = FXCollections.observableArrayList(Main.questionTable.getAllTopics());
         //ComboBox<String> topics = new ComboBox<String>(options);
 		topics = new ListView<String>(options);
 		topics.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -68,7 +68,10 @@ public class OpeningScreen extends Scene{
 		qNumber.setAlignment(Pos.CENTER);
 		qNumber.setSpacing(10);
 		qNumber.getChildren().addAll(numQuestions,number);
-		instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
+		if (Main.questionTable.getNumQs() == 0)
+			instructionLabel = new Label("Questions must be added before starting the quiz.");
+		else
+			instructionLabel = new Label("ctrl+click or shift+click to choose multiple topics!");
 		instructionLabel.setWrapText(true);
 		
 		//Set padding and gaps

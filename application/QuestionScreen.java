@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
  */
 public class QuestionScreen extends Scene {
 	
+	// scene fields. static so that other classes can modify them
 	private Scene questionScreen;
 	private String title;
 	static GridPane root;
@@ -36,6 +37,10 @@ public class QuestionScreen extends Scene {
 	static Label warningLabel;
 	private int numChoices;
 	
+	/**
+	 * Constructor for the QuestionScreen.
+	 * @param parent is the group for the scene to be created
+	 */
 	public QuestionScreen(Parent parent) {
 		super(parent);
 		
@@ -62,6 +67,11 @@ public class QuestionScreen extends Scene {
 		
 	}
 	
+	/**
+	 * Sets up and returns the scene to be put on the primary stage.
+	 * @param q is the Question to be displayed.
+	 * @return the scene to be put on the primary stage
+	 */
 	public Scene getScene(Question q) {
 		
 		if (q.getImagePath().equals("none")) { // question does not have image  
@@ -87,7 +97,7 @@ public class QuestionScreen extends Scene {
 	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
 
-        	
+        	// add nodes to scene
 			root.add(questionLabel, 2, 0);
 			root.add(choices, 2, 1);
 			root.add(nextButton, 2, 2);
@@ -127,6 +137,7 @@ public class QuestionScreen extends Scene {
 	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
         	
+        	// add nodes to scene
         	root.add(qImageView, 2, 0);
 			root.add(questionLabel, 0, 0);
 			root.add(choices, 0, 1);
@@ -138,18 +149,34 @@ public class QuestionScreen extends Scene {
 		return this.questionScreen;
 	}
 	
+	/**
+	 * Getter method for the title of the scene.
+	 * @return the title for the scene.
+	 */
 	public String getTitle() {
 		return title;
 	}
 	
+	/**
+	 * Getter method for the user's score on the quiz.
+	 * @return the score of the quiz.
+	 */
 	public double getQuizScore() {
 		return Main.qd.getQuizScore();
 	}
 	
+	/**
+	 * Getter method for the number of radio button choices.
+	 * @return the number of choices.
+	 */
 	public int getNumberOfChoices() {
 		return numChoices;
 	}
 	
+	/**
+	 * Gets the String answer from the radio button chosen by the user.
+	 * @return
+	 */
 	public String getSelectedAnswer() {
 		RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
 		return selectedRadioButton.getText();
