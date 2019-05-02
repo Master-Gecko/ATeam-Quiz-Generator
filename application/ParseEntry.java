@@ -60,4 +60,8 @@ public class ParseEntry {
 	public String getQuestion() {
 		return "Topic: " + topic + " Question: " + question + " Answers: " + ParsedAnswers.toString();
 	}
+	
+	public Question getQuestionObject() {
+		return new Question(topic,"unused",question,"null",ParsedAnswers);
+	}
 }
