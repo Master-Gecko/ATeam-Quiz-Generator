@@ -29,16 +29,16 @@ import java.io.FileNotFoundException;
 public class QuestionScreen extends Scene {
 	
 	// scene fields. static so that other classes can modify them
-	private Scene questionScreen;
-	private String title;
-	static GridPane root;
-	static Label questionLabel;
-	static Button nextButton;
-	static VBox choices;
-	static ToggleGroup group;
-	static Image qImage;
-	static ImageView qImageView;
-	static Label resultLabel;
+	private Scene questionScreen; // scene to be returned by getScene() method
+	private String title; // title of the window, which will include question number
+	static GridPane root; // the layout of the scene
+	static Label questionLabel; // displays the question
+	static Button nextButton; // used to check answer, then move on to next question or submit quiz
+	static VBox choices; // layout that holds radio buttons to select answer
+	static ToggleGroup group; // ToggleGroup for the radio buttons
+	static Image qImage; // JavaFX Image object for question images
+	static ImageView qImageView; // JavaFX object to display question images
+	static Label resultLabel; // tells whether user chose correct answer or warns user to pick answer
 	private int numChoices;
 	
 	/**
@@ -116,6 +116,7 @@ public class QuestionScreen extends Scene {
 		}
 		else { // question has image
 			
+			// parse and display image from Question object
 			File file = new File(q.getImagePath());
 	        qImage = new Image(file.toURI().toString());
 			qImageView = new ImageView(qImage);

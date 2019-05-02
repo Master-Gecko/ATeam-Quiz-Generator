@@ -21,13 +21,13 @@ import javafx.stage.Stage;
  */
 public class QuizDriver {
 
-	private int numQuestions;
-	private int numCorrect;
-	private double quizScore;
-	private ArrayList<Question> quiz;
-	private int currentQuestionIndex;
-	private Stage primaryStage;
-	private QuestionScreen qs;
+	private int numQuestions; // total number of questions in the quiz
+	private int numCorrect; // number of questions that the user answers correctly
+	private double quizScore; // a double for percentage of correct answers
+	private ArrayList<Question> quiz; // ArrayList of quiz questions
+	private int currentQuestionIndex; // the index of the current question in the quiz ArrayList
+	private Stage primaryStage; // the primary stage of the program
+	private QuestionScreen qs; // the question screen which will be updated dynamically
 	
 	/**
 	 * Constructor for QuizDriver object, which initializes fields.
@@ -52,6 +52,7 @@ public class QuizDriver {
 	 * @throws IllegalNullKeyException when the given topic is null (should not happen)
 	 */
 	void addQuestions(ObservableList<String> topics, int numberOfQuestions) throws IllegalNullKeyException, KeyNotFoundException {
+		// create an ArrayList for all possible quiz questions from chosen topics
 		ArrayList<Question> allQuestionsForChosenTopics = new ArrayList<Question>();
 		for (int i = 0; i < topics.size(); i++) {
 			allQuestionsForChosenTopics.addAll(Main.questionTable.getQuestionsForTopic(topics.get(i)));
@@ -62,6 +63,7 @@ public class QuizDriver {
 		Random r = new Random(); // random object to randomly select questions from question HashTable
 		Question addToQuiz;
 		for (int i = 0; i < numberOfQuestions; i++) {
+			// choose questions randomly using Random.nextInt() method
 			addToQuiz = allQuestionsForChosenTopics.get(r.nextInt(allQuestionsForChosenTopics.size()));
 			allQuestionsForChosenTopics.remove(addToQuiz);
 			quiz.add(addToQuiz);
@@ -69,7 +71,7 @@ public class QuizDriver {
 	}
 	
 	/**
-	 * this method will serve as the driver for the Quiz.
+	 * This method sets up the quiz by updating the screen and initializing some more variables.
 	 */
 	public void startQuiz(Stage primaryStage) {
 		numQuestions = quiz.size();
@@ -85,9 +87,10 @@ public class QuizDriver {
 	 */
 	void updateScreen() {
 		// move to next question
-		QuestionScreen.group.getSelectedToggle().setSelected(false);
+		QuestionScreen.group.getSelectedToggle().setSelected(false); // untoggle chosen answer
 		currentQuestionIndex++;
-		if (currentQuestionIndex != numQuestions) {
+		// reset question screen
+		if (currentQuestionIndex != numQuestions) { // current index = number of q's only on last q
 			QuestionScreen.root.getChildren().remove(QuestionScreen.questionLabel);
 			QuestionScreen.root.getChildren().remove(QuestionScreen.choices);
 			QuestionScreen.root.getChildren().remove(QuestionScreen.nextButton);
@@ -95,6 +98,7 @@ public class QuizDriver {
 			if (QuestionScreen.root.getChildren().contains(QuestionScreen.qImageView)) {
 				QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
 			}
+			// update scene
 			primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 			primaryStage.setTitle("Question " + (currentQuestionIndex + 1) + "/" + numQuestions);
 		}
@@ -124,6 +128,11 @@ public class QuizDriver {
 		return numQuestions;
 	}
 	
+	/**
+	 * This method tells the user if they answered the question right, as well as doing the
+	 * back-end functions including incrementing the user's score and preparing for the next
+	 * question.
+	 */
 	public void checkAnswer() {
 		// make sure an answer is selected
 		if (QuestionScreen.group.getSelectedToggle() == null) {
@@ -141,6 +150,7 @@ public class QuizDriver {
 			QuestionScreen.resultLabel.setText("Correct!");
 		else 
 			QuestionScreen.resultLabel.setText("Incorrect.");
+		// update screen to prepare for next question or submitting quiz
 		if (currentQuestionIndex == numQuestions - 1)
 			QuestionScreen.nextButton.setText("Submit Quiz");
 		else
