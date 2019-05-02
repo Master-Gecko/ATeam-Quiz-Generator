@@ -78,9 +78,6 @@ public class QuizDriver {
 		qs = new QuestionScreen(parent);
 		primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 		primaryStage.setTitle("Question " + 1 + "/" + numQuestions);
-		if (quiz.size() == 1) {
-			QuestionScreen.nextButton.setText("Submit Quiz");
-		}
 	}
 	
 	/**
@@ -136,12 +133,9 @@ public class QuizDriver {
 		
 		// check for correct answer
 		boolean correct = false;
-		for (int i = 0; i < qs.getNumberOfChoices(); i++) {
-			if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer())) {
-				numCorrect++;
-				correct = true;
-				i = qs.getNumberOfChoices();
-			}
+		if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer())) {
+			numCorrect++;
+			correct = true;
 		}
 		if (correct)
 			QuestionScreen.resultLabel.setText("Correct!");
