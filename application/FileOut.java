@@ -16,7 +16,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * adding to master branch
+ * Output to a designate file. Output file handler handles all the user input.
+ * This class only formats the data into a json file. Potential problem: json
+ * output print it all in one line but is still fully functional
  * 
  * @author odmas
  *
@@ -24,32 +26,31 @@ import org.json.simple.parser.ParseException;
 public class FileOut {
 	private List<Question> questions;
 	private ArrayList<JSONObject> questionArray;
-	
 
 	public FileOut(String filePath, HashTable<Question> hashTable)
 			throws FileNotFoundException, IOException, ParseException {
 //		System.out.println(hashTable.getAllTopics());
 		JSONObject JSONQuestionArray = new JSONObject();
 		questionArray = new ArrayList<JSONObject>();
-		for (String topic : hashTable.getAllTopics()) {
+		for (String topic : hashTable.getAllTopics()) { // find all topics then find all questions for each topi
 			try {
 				questions = hashTable.getQuestionsForTopic(topic);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			for (Question q : questions) {
+			for (Question q : questions) { // get info for each question
 				JSONObject question = new JSONObject();
 				question.put("meta-data", "unused");
 				question.put("questionText", q.getQuestion());
 				question.put("topic", q.getTopic());
 				question.put("image", q.getImagePath());
 				JSONArray answers = new JSONArray();
-				for (Answer a : q.getAnswerList()) {
+				for (Answer a : q.getAnswerList()) { // formats each answer
 					JSONObject curr = new JSONObject();
 					if (a.isCorrect())
 						curr.put("isCorrect", "T");
-					else 
+					else
 						curr.put("isCorrect", "F");
 					curr.put("choice", a.toString());
 					answers.add(curr);
@@ -59,7 +60,7 @@ public class FileOut {
 			}
 		}
 		JSONQuestionArray.put("questionArray", questionArray);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filePath)); // export to file
 		writer.write(JSONQuestionArray.toString());
 		writer.close();
 	}
