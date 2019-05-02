@@ -21,6 +21,7 @@ public class ParseEntry {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param topic
 	 * @param question
 	 * @param answerUnparsed
@@ -32,9 +33,10 @@ public class ParseEntry {
 		this.ParsedAnswers = new ArrayList<Answer>();
 		// doesn't have metadata or image path
 	}
+
 	/**
-	 * Formats question, returns false if an exception is thrown
-	 * Adds answers if not
+	 * Formats question, returns false if an exception is thrown Adds answers if not
+	 * 
 	 * @return
 	 */
 	boolean formatQuestion() {
@@ -48,20 +50,27 @@ public class ParseEntry {
 					ParsedAnswers.add(new Answer(false, answerParsed[1]));
 			}
 			return true;
-		}catch(Exception e) {//If exception is thrown, then program "crashed"			
-			return false;//Inform handler that question crashed
+		} catch (Exception e) {// If exception is thrown, then program "crashed"
+			return false;// Inform handler that question crashed
 		}
 	}
 
 	/**
 	 * Getter method for the test class
+	 * 
 	 * @return
 	 */
 	public String getQuestion() {
 		return "Topic: " + topic + " Question: " + question + " Answers: " + ParsedAnswers.toString();
 	}
-	
+
+	/**
+	 * This returns the question object that is necessary for adding the questions
+	 * from different class
+	 * 
+	 * @return
+	 */
 	public Question getQuestionObject() {
-		return new Question(topic,"unused",question,"null",ParsedAnswers);
+		return new Question(topic, "unused", question, "null", ParsedAnswers);
 	}
 }
