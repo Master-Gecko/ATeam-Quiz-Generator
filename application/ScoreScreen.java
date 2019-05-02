@@ -44,12 +44,8 @@ public class ScoreScreen extends Scene {
 			Text result = new Text("You got "+Main.qd.getNumCorrect()+"/"+Main.qd.getNumQuestions());
 			
 			//Exit quiz button
-			exitQuiz = new Button("Exit Quiz");
+			exitQuiz = new Button("Return to Menu");
 			exitQuiz.setOnAction(new ScoreScreenHandler(exitQuiz));
-			
-			//Try another quiz
-			Button anotherQuiz = new Button("Try Another Quiz");
-			anotherQuiz.setOnAction(new ScoreScreenHandler(anotherQuiz));
 			
 			//Set row and column constraints
 			for (int i = 0; i < 5; i++) {
@@ -66,8 +62,7 @@ public class ScoreScreen extends Scene {
 			
 			//Format the boxes
 			root.add(result, 2, 0);
-			root.add(exitQuiz, 0, 4);
-			root.add(anotherQuiz, 3, 4);
+			root.add(exitQuiz, 0, 3);
 			
 			scoreScreen = new Scene(root, 800,600);
 			scoreScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
