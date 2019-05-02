@@ -40,8 +40,11 @@ public class ScoreScreen extends Scene {
 		    // Create a GridPane
 			GridPane root = new GridPane();
 			
+			long roundedScore = Math.round(Main.qd.getQuizScore()*100);
+			
 			//Result message
-			Text result = new Text("You got "+Main.qd.getNumCorrect()+"/"+Main.qd.getNumQuestions());
+			Text result = new Text("You got "+Main.qd.getNumCorrect()+"/"+Main.qd.getNumQuestions() + "!\n"+
+			roundedScore+"%");
 			
 			//Exit quiz button
 			exitQuiz = new Button("Return to Menu");
