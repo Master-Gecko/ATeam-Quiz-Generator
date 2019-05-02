@@ -27,8 +27,11 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
 
   @Override
   public void handle(ActionEvent event) {
+	  
+	//Start Quiz button
     if (b.getText().equals("Start\nQuiz")) {
       Main.qd = new QuizDriver();
+      
       // parse number of questions and topics
       int numQuestions;
       try {
@@ -51,28 +54,37 @@ class OpeningScreenHandler implements EventHandler<ActionEvent> {
       } catch (IndexOutOfBoundsException e) {
         OpeningScreen.instructionLabel.setText("Not enough questions uploaded.");
         return;
-      } catch (Exception e) {
-        // this should never be reached, only here to avoid compiler error
-        System.out.println("unexpected exception");
-      }
+      } catch (Exception e) {/*This shouldn't be reached*/ }
 
       // change scene
       Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       Main.qd.startQuiz(primaryStage);
-    } else if (b.getText().equals("Insert Another\n     Question")) {
+      
+    } 
+    //Insert/Import Button
+    else if (b.getText().equals("Insert Another\n     Question")) {
       Group parent = new Group();
       InsertQuestionScreen iqs = new InsertQuestionScreen(parent);
       Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       primaryStage.setScene(iqs.getScene());
       primaryStage.setTitle(iqs.getTitle());
-    } else if (b.getText().equals("Load Questions\n      From File")) {
+    } 
+    //Load Questions Button
+    else if (b.getText().equals("Load Questions\n      From File")) {
       Group parent = new Group();
       LoadAdditionalFileScreen lafs = new LoadAdditionalFileScreen(parent);
       Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       primaryStage.setScene(lafs.getScene());
       primaryStage.setTitle(lafs.getTitle());
-    } else if (b.getText().equals("Close Window")) {
-      Platform.exit();
+    } 
+    //Close Window Button
+    else if (b.getText().equals("Close Window")) {
+    	//Return to main menu after 
+		Group parent = new Group();
+		SaveScreen ss = new SaveScreen(parent);
+		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		primaryStage.setScene(ss.getScene());
+		primaryStage.setTitle(ss.getTitle());
     }
   }
 
