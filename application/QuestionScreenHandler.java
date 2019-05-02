@@ -37,7 +37,7 @@ public class QuestionScreenHandler implements EventHandler<ActionEvent> {
 		else if (b.getText().equals("Submit Quiz")) {
 			Main.qd.updateScreen();
 			// if the user has not chosen an answer
-			if (QuestionScreen.warningLabel.getText().equals("Choose an answer!")) {
+			if (QuestionScreen.resultLabel.getText().equals("Choose an answer!")) {
 				return;
 			}
 			
@@ -47,6 +47,9 @@ public class QuestionScreenHandler implements EventHandler<ActionEvent> {
 			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 			primaryStage.setScene(ss.getScene());
 			primaryStage.setTitle(ss.getTitle());
+		}
+		else if (b.getText().equals("Check Answer")) {
+			Main.qd.checkAnswer();
 		}
 	}
 }

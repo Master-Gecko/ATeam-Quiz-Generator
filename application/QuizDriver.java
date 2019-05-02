@@ -37,16 +37,6 @@ public class QuizDriver {
 		numCorrect = 0;
 		quiz = new ArrayList<Question>();
 		currentQuestionIndex = 0;
-		
-		// to test QuestionScreen
-//		ArrayList<Answer> answers = new ArrayList<Answer>();
-//		answers.add(new Answer(true, "right"));
-//		answers.add(new Answer(false, "wrong"));
-//		quiz.add(new Question("test", "This is a test question?", "doggy.JPG", answers));
-//		quiz.add(new Question("test", "This is also test question?", "doggy.JPG", answers));
-//		ArrayList<Answer> answers2 = new ArrayList<Answer>(answers);
-//		answers2.add(new Answer(false, "third option"));
-//		quiz.add(new Question("test", "This is a test question 3?", "none", answers2));
 	}
 	
 	/**
@@ -67,7 +57,7 @@ public class QuizDriver {
 			allQuestionsForChosenTopics.addAll(Main.questionTable.getQuestionsForTopic(topics.get(i)));
 		}
 		if (allQuestionsForChosenTopics.size() < numberOfQuestions) { // not enough questions for this topic
-			throw new IndexOutOfBoundsException();
+			numberOfQuestions = allQuestionsForChosenTopics.size();
 		}
 		Random r = new Random(); // random object to randomly select questions from question HashTable
 		Question addToQuiz;
@@ -97,21 +87,6 @@ public class QuizDriver {
 	 * changes the question when the user chooses to move on.
 	 */
 	void updateScreen() {
-		// make sure an answer is selected
-		if (qs.group.getSelectedToggle() == null) {
-			QuestionScreen.warningLabel.setText("Choose an answer!");
-			return;
-		}
-		QuestionScreen.warningLabel.setText("");
-		
-		// check if right answer
-		for (int i = 0; i < qs.getNumberOfChoices(); i++) {
-			if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer())) {
-				numCorrect++;
-				i = qs.getNumberOfChoices();
-			}
-		}
-		
 		// move to next question
 		QuestionScreen.group.getSelectedToggle().setSelected(false);
 		currentQuestionIndex++;
@@ -119,14 +94,12 @@ public class QuizDriver {
 			QuestionScreen.root.getChildren().remove(QuestionScreen.questionLabel);
 			QuestionScreen.root.getChildren().remove(QuestionScreen.choices);
 			QuestionScreen.root.getChildren().remove(QuestionScreen.nextButton);
-			QuestionScreen.root.getChildren().remove(QuestionScreen.warningLabel);
+			QuestionScreen.root.getChildren().remove(QuestionScreen.resultLabel);
 			if (QuestionScreen.root.getChildren().contains(QuestionScreen.qImageView)) {
 				QuestionScreen.root.getChildren().remove(QuestionScreen.qImageView);
 			}
 			primaryStage.setScene(qs.getScene(quiz.get(currentQuestionIndex)));
 			primaryStage.setTitle("Question " + (currentQuestionIndex + 1) + "/" + numQuestions);
-			if (currentQuestionIndex == numQuestions - 1)
-				qs.nextButton.setText("Submit Quiz");
 		}
 	}
 	
@@ -152,6 +125,32 @@ public class QuizDriver {
 	 */
 	public int getNumQuestions() {
 		return numQuestions;
+	}
+	
+	public void checkAnswer() {
+		// make sure an answer is selected
+		if (QuestionScreen.group.getSelectedToggle() == null) {
+			QuestionScreen.resultLabel.setText("Choose an answer!");
+			return;
+		}
+		
+		// check for correct answer
+		boolean correct = false;
+		for (int i = 0; i < qs.getNumberOfChoices(); i++) {
+			if (quiz.get(currentQuestionIndex).getAnswer().equals(qs.getSelectedAnswer())) {
+				numCorrect++;
+				correct = true;
+				i = qs.getNumberOfChoices();
+			}
+		}
+		if (correct)
+			QuestionScreen.resultLabel.setText("Correct!");
+		else 
+			QuestionScreen.resultLabel.setText("Incorrect.");
+		if (currentQuestionIndex == numQuestions - 1)
+			QuestionScreen.nextButton.setText("Submit Quiz");
+		else
+			QuestionScreen.nextButton.setText("Next Question");
 	}
 	
 }

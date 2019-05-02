@@ -38,7 +38,7 @@ public class QuestionScreen extends Scene {
 	static ToggleGroup group;
 	static Image qImage;
 	static ImageView qImageView;
-	static Label warningLabel;
+	static Label resultLabel;
 	private int numChoices;
 	
 	/**
@@ -62,9 +62,9 @@ public class QuestionScreen extends Scene {
 		
 		// Create Elements
 		questionLabel = new Label("What is this?");
-		nextButton = new Button("Next Question");
+		nextButton = new Button("Check Answer");
 		nextButton.setOnAction(new QuestionScreenHandler(nextButton));
-		warningLabel = new Label();
+		resultLabel = new Label();
 		
 		questionScreen = new Scene(root, 800, 600);
 		questionScreen.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
@@ -100,12 +100,18 @@ public class QuestionScreen extends Scene {
 	        questionLabel.setMaxWidth(400);
 	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
+        	
+        	// set up nextButton
+        	nextButton.setText("Check Answer");
+        	
+        	// reset resultLabel
+        	resultLabel.setText("");
 
         	// add nodes to scene
 			root.add(questionLabel, 2, 0);
 			root.add(choices, 2, 1);
 			root.add(nextButton, 2, 2);
-			root.add(warningLabel, 2, 3);
+			root.add(resultLabel, 2, 3);
         	
 		}
 		else { // question has image
@@ -142,12 +148,18 @@ public class QuestionScreen extends Scene {
 	        questionLabel.setMinWidth(400);
         	questionLabel.setWrapText(true);
         	
+        	// set up nextButton
+        	nextButton.setText("Check Answer");
+        	
+        	// reset resultLabel
+        	resultLabel.setText("");
+        	
         	// add nodes to scene
         	root.add(qImageView, 2, 0);
 			root.add(questionLabel, 0, 0);
 			root.add(choices, 0, 1);
 			root.add(nextButton, 2, 2);
-			root.add(warningLabel, 0, 2);
+			root.add(resultLabel, 0, 2);
 
         	
 		}
